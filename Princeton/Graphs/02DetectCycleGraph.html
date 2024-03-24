@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Graph {
+            constructor(vertices) {
+                this.V = vertices;
+                this.adj = new Array(vertices);
+                for (let i = 0; i < vertices; ++i) {
+                    this.adj[i] = [];
+                }
+            }
+
+            addEdge(v, w) {
+                this.adj[v].push(w);
+                this.adj[w].push(v); // Since the graph is undirected
+            }
+
+            // A helper function for BFS traversal
+            bfs(s, visited) {
+                const queue = [];
+                queue.push(s);
+                visited[s] = true;
+
+                while (queue.length !== 0) {
+                    const u = queue.shift();
+                    for (const v of this.adj[u]) {
+                        if (!visited[v]) {
+                            visited[v] = true;
+                            queue.push(v);
+                        }
+                    }
+                }
+            }
+
+            // Returns true if the graph contains a cycle, else false
+            isCyclic() {
+                // Mark all the vertices as not visited
+                const visited = new Array(this.V).fill(false);
+
+                for (let u = 0; u < this.V; u++) {
+                    if (!visited[u]) {
+                        // If a vertex is visited in its traversal, and if it's already visited, then there is a cycle
+                        this.bfs(u, visited);
+                        for (const v of this.adj[u]) {
+                            if (visited[v]) return true;
+                        }
+                    }
+                }
+                return false;
+            }
+        }
+
+        // Example usage:
+        const g1 = new Graph(5);
+        g1.addEdge(1, 0);
+        g1.addEdge(0, 2);
+        g1.addEdge(2, 0);
+        g1.addEdge(0, 3);
+        g1.addEdge(3, 4);
+        console.log("Graph 1 contains cycle? " + g1.isCyclic());
+
+        const g2 = new Graph(3);
+        g2.addEdge(0, 1);
+        g2.addEdge(1, 2);
+        console.log("Graph 2 contains cycle? " + g2.isCyclic());
+
+
+    </script>
+</body>
+
+</html>

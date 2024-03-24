@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class CircularQueue {
+            constructor(capacity) {
+                this.capacity = capacity;
+                this.queue = new Array(capacity);
+                this.front = 0;
+                this.rear = -1;
+                this.size = 0;
+            }
+
+            enqueue(value) {
+                if (this.isFull()) {
+                    console.log("Queue is full. Cannot enqueue.");
+                    return;
+                }
+
+                this.rear = (this.rear + 1) % this.capacity;
+                this.queue[this.rear] = value;
+                this.size++;
+            }
+
+            dequeue() {
+                if (this.isEmpty()) {
+                    console.log("Queue is empty. Cannot dequeue.");
+                    return undefined;
+                }
+
+                const dequeuedValue = this.queue[this.front];
+                this.front = (this.front + 1) % this.capacity;
+                this.size--;
+
+                return dequeuedValue;
+            }
+
+            front() {
+                if (this.isEmpty()) {
+                    console.log("Queue is empty.");
+                    return undefined;
+                }
+
+                return this.queue[this.front];
+            }
+
+            rear() {
+                if (this.isEmpty()) {
+                    console.log("Queue is empty.");
+                    return undefined;
+                }
+
+                return this.queue[this.rear];
+            }
+
+            isEmpty() {
+                return this.size === 0;
+            }
+
+            isFull() {
+                return this.size === this.capacity;
+            }
+
+            print() {
+                if (this.isEmpty()) {
+                    console.log("Queue is empty.");
+                    return;
+                }
+
+                let output = "";
+                let index = this.front;
+                for (let i = 0; i < this.size; i++) {
+                    output += this.queue[index] + " ";
+                    index = (index + 1) % this.capacity;
+                }
+                console.log("Queue:", output);
+            }
+        }
+
+        // Example usage:
+        const circularQueue = new CircularQueue(5);
+
+        circularQueue.enqueue(1);
+        circularQueue.enqueue(2);
+        circularQueue.enqueue(3);
+        circularQueue.enqueue(4);
+
+        circularQueue.print(); // Output: Queue: 1 2 3 4
+
+        console.log("Dequeued:", circularQueue.dequeue()); // Output: Dequeued: 1
+
+        circularQueue.enqueue(5);
+        circularQueue.print(); // Output: Queue: 2 3 4 5
+
+    </script>
+</body>
+
+</html>

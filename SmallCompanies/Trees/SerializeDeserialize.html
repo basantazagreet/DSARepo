@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class TreeNode {
+            constructor(val) {
+                this.val = val;
+                this.left = null;
+                this.right = null;
+            }
+        }
+
+        function serialize(root) {
+            if (!root) {
+                return 'null';
+            }
+
+            const left = serialize(root.left);
+            const right = serialize(root.right);
+
+            return `${root.val},${left},${right}`;
+        }
+
+        function deserialize(data) {
+            const values = data.split(',');
+
+            function buildTree() {
+                const val = values.shift();
+                if (val === 'null') {
+                    return null;
+                }
+
+                const node = new TreeNode(parseInt(val));
+                node.left = buildTree();
+                node.right = buildTree();
+                return node;
+            }
+
+            return buildTree();
+        }
+
+        // Example usage:
+
+        // Create a binary tree
+        const root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.right.left = new TreeNode(4);
+        root.right.right = new TreeNode(5);
+
+        // Serialize the binary tree
+        const serializedTree = serialize(root);
+        console.log("Serialized Tree:", serializedTree);
+
+        // Deserialize the string representation back into a binary tree
+        const deserializedTree = deserialize(serializedTree);
+        console.log("Deserialized Tree:", deserializedTree);
+
+    </script>
+</body>
+
+</html>

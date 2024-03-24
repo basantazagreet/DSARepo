@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Array deletion please open console</h1>
+
+    <input type="text" id="del-pos">
+    <button onclick="deleteFromArray()">Delete in array</button>
+    <button onclick="deleteFromArrayUsingBuiltInMethod()">Delete in array Built in method(Data is deleted not
+        position)</button>
+    <span style="color:red; display: none;" id="error-span">Position is not valid</span>
+
+    <script>
+
+
+
+
+        function deleteFromArray() {
+            let data = [3, 22, 33, 44, 65, 75, 89, 65, 34];
+            console.log(data);
+            //position starts from zero
+            let pos = document.getElementById('del-pos').value;
+            let del_pos = parseInt(pos);
+            if (isNaN(pos) || pos > data.length || pos < 0) {
+                document.getElementById('error-span').style.display = 'inline';
+            } else {
+
+                //right to left swap and last element removed by decreasing length
+                for (let i = del_pos; i < data.length - 1; i++) {
+                    data[i] = data[i + 1];
+                }
+                data.length--;
+                console.log(data);
+            }
+        }
+
+        function deleteFromArrayUsingBuiltInMethod() {
+
+            let data = [3, 22, 33, 44, 65, 75, 89, 65, 34];
+            console.log(data);
+            //position starts from zero
+            let pos = document.getElementById('del-pos').value;
+            let del_pos = parseInt(pos);
+            if (isNaN(pos) || pos > data.length || pos < 0) {
+                document.getElementById('error-span').style.display = 'inline';
+            } else {
+                //Splice method used 1 means no. of elements to be deleted.
+                data.splice(pos, 1);
+                console.log(data);
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>

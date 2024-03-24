@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        /*
+        (LeetCode Q.No 1209(Medium) Remove All Adjacent Duplicates in String II" .
+        k number of duplicates remove garne*/
+        class Stack {
+            constructor() {
+                this.items = [];
+            }
+
+            isEmpty() {
+                return this.items.length === 0;
+            }
+
+            push(item) {
+                this.items.push(item);
+            }
+
+            pop() {
+                if (this.isEmpty()) {
+                    console.log("Stack Underflow: The stack is empty.");
+                    return null;
+                } else {
+                    return this.items.pop();
+                }
+            }
+
+            peek() {
+                if (this.isEmpty()) {
+                    console.log("Stack is empty.");
+                    return null;
+                } else {
+                    return this.items[this.items.length - 1];
+                }
+            }
+
+            size() {
+                return this.items.length;
+            }
+        }
+
+        function removeDuplicates(s, k) {
+            const stack = [];  // Use a stack to keep track of characters and their counts
+
+            for (const char of s) {
+                if (stack.length > 0 && stack[stack.length - 1][0] === char) {
+                    stack[stack.length - 1][1]++;  // Increment count if current character is the same as the top of the stack
+                } else {
+                    stack.push([char, 1]);  // Add character to stack with count 1
+                }
+
+                if (stack[stack.length - 1][1] === k) {
+                    stack.pop();  // Pop if the count reaches k
+                }
+            }
+
+            const result = stack.map(([char, count]) => char.repeat(count)).join('');  // Reconstruct the string from the stack
+            return result;
+        }
+
+        // Example usage:
+        const s = "deeedbbcccbdaa";
+        const k = 3;
+        const result = removeDuplicates(s, k);
+        console.log(result);
+
+
+    </script>
+</body>
+
+</html>

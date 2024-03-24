@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function minCostClimbingStairsWithMemo(cost, step, memo) {
+            if (step <= 1) {
+                return cost[step];
+            }
+
+            if (!memo.hasOwnProperty(step)) {
+                const costOneStep = minCostClimbingStairsWithMemo(cost, step - 1, memo);
+                const costTwoSteps = minCostClimbingStairsWithMemo(cost, step - 2, memo);
+
+                memo[step] = cost[step] + Math.min(costOneStep, costTwoSteps);
+            }
+
+            return memo[step];
+        }
+
+        // Example usage:
+        const cost = [10, 15, 20];
+        const n = cost.length;
+        const memo = {};
+        console.log(minCostClimbingStairsWithMemo(cost, n - 1, memo)); // Output: 15
+
+    </script>
+</body>
+
+</html>

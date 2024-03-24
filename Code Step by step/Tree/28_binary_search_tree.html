@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Node {
+            constructor(val) {
+                this.left = null;
+                this.value = val;
+                this.right = null;
+            }
+        }
+        class BinarySearchTree {
+            constructor() {
+                this.root = null;
+            }
+
+            isTreeEmpty() {
+                return this.root === null;
+            }
+
+            makeTree(val) {
+                const new_node = new Node(val);
+                if (this.root === null) {
+                    //Naya tree banyo
+                    this.root = new_node;
+                } else {
+                    //Root is given, new_node has to go in right place through recursion on left or right
+                    this.insertNode(this.root, new_node);
+                }
+            }
+            insertNode(root, new_node) {
+                //Tree ko root, function call huda first parameter will point to the current root(node) which is going down
+                if (new_node.value < root.value) {
+                    if (root.left === null) {
+                        root.left = new_node;
+                    } else {
+                        //Recursion suru vayo, next iteration ma left item is the root which means left child ma gayo
+                        this.insertNode(root.left, new_node);
+                    }
+                } else {
+                    if (root.right === null) {
+                        root.right = new_node;
+                    } else {
+                        //right child ma gayo
+                        this.insertNode(root.right, new_node);
+                    }
+                }
+            }
+
+            search(root, val) {
+                if (root === null) {
+                    //Nowhere to go
+                    return false;
+                } else if (root.value === val) {
+                    return true;
+                } else if (val < root.value) {
+                    //left child ma current root gayo
+                    return this.search(root.left, val);
+                } else {
+                    return this.search(root.right, val);
+                }
+            }
+
+            //Tree ko euta figure heresi bujhincha
+            preOrder(root) {
+                if (root) {
+                    //Leftmost non-empty node lai sakdai jancha, root pahila printed
+                    console.log(root.value);
+                    this.preOrder(root.left);
+                    this.preOrder(root.right);
+                }
+            }
+
+            inOrder(root) {
+                if (root) {
+                    this.inOrder(root.left);
+                    //Call stack ma top ko lai haldai, leftmost lai sakdai jancha
+                    console.log(root.value);
+                    this.inOrder(root.right);
+
+                }
+            }
+
+            postOrder(root) {
+                if (root) {
+                    //Left depth ma gayera left aani right gardai mathi aucha
+                    this.postOrder(root.left);
+                    this.postOrder(root.right);
+                    //Tail recursion: first ma push vako last ma print huncha
+                    console.log(root.value);
+
+                }
+            }
+
+            bfsTraversing() {
+                let queue = [];
+                //Purai object nai push huncha
+                queue.push(this.root);
+                while (queue.length) {
+                    /*used to dequeue the front node (the one at the beginning of the array) usually 3 wata huncha
+                    current, left, right in a Queue way. First come first remove basis ma. so current goes first
+                    */
+                    let current = queue.shift();
+
+                    //shifts value left or right. empty queue ma left wa right element bascha
+                    if (current.left) {
+                        //Left child pushed
+                        queue.push(current.left);
+                    }
+                    if (current.right) {
+                        //right child pushed
+                        queue.push(current.right);
+                    }
+                    console.log(current.value);
+                    //Loop runs till all are empty
+                }
+            }
+
+            findMin(root) {
+                if (!root.left) {
+                    return root.value;
+                } else {
+                    return this.findMin(root.left)
+                }
+            }
+
+            findMax(root) {
+                if (!root.right) {
+                    return root.value;
+                } else {
+                    return this.findMax(root.right);
+                }
+            }
+
+            removeData(val) {
+                //Assigning new updated node in root
+                this.root = this.deleteNode(this.root, val);
+            }
+
+            deleteNode(root, value) {
+                if (root === null) {
+                    return null;
+                }
+                //Searching the delete position till value and root.value are equal
+                if (value < root.value) {
+                    root.left = this.deleteNode(root.left, value);
+                } else if (value > root.value) {
+                    root.right = this.deleteNode(root.right, value);
+                }else{
+                    //Tyo position ma pugiyo equal vayo vane
+                    if(!root.left && !root.right){
+                        //Target node ko both child navaye tya empty huncha so null return gareko
+                        return null;
+                    }else if(!root.left){
+                        //Right matra vetiye right side lai nai return gardine
+                        return root.right;
+                    }else if(!root.right){
+                        //Left matra vetiye left lai nai assign garna return gardine
+                        return root.left;
+                    }
+
+                    //Both left and right present vaye right side ko min value bascha
+                    root.value = this.findMin(root.right);
+                    //right node ko tyo min value pani delete garna paryo
+                    root.right = this.deleteNode(root.right, root.value);
+                }
+                return root;
+            }
+        }
+
+        const bst = new BinarySearchTree();
+        bst.makeTree(20);
+        bst.makeTree(10);
+        bst.makeTree(5);
+        bst.makeTree(30);
+        bst.makeTree(25);
+        bst.makeTree(40);
+        console.log(bst);
+        console.log('Pre order')
+        bst.preOrder(bst.root);
+        console.log(bst.search(bst.root, 30));
+        console.log('In order')
+        bst.inOrder(bst.root);
+        console.log('Post order')
+        bst.postOrder(bst.root);
+        console.log('Breadth first')
+        bst.bfsTraversing();
+        console.log("Min: " + bst.findMin(bst.root));
+        console.log("Max: " + bst.findMax(bst.root));
+        bst.removeData(20);
+        console.log(bst);
+
+    </script>
+</body>
+
+</html>

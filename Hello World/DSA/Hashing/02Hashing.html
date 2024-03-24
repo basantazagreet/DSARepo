@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Hash table implementation with separate chaining
+            
+
+        class HashTable {
+            constructor(size = 10) {
+                this.size = size;
+                this.table = new Array(size).fill(null).map(() => []);
+            }
+
+            // Basic hash function using string length
+            hash(key) {
+                let hashValue = 0;
+                for (let i = 0; i < key.length; i++) {
+                    hashValue += key.charCodeAt(i);
+                }
+                return hashValue % this.size;
+            }
+
+            // Insert key-value pair into the hash table
+            insert(key, value) {
+                const index = this.hash(key);
+                this.table[index].push({ key, value });
+            }
+
+            // Retrieve value associated with a key
+            get(key) {
+                const index = this.hash(key);
+                const bucket = this.table[index];
+
+                for (const item of bucket) {
+                    if (item.key === key) {
+                        return item.value;
+                    }
+                }
+
+                return undefined; // Key not found
+            }
+
+            // Remove a key-value pair from the hash table
+            remove(key) {
+                const index = this.hash(key);
+                const bucket = this.table[index];
+
+                for (let i = 0; i < bucket.length; i++) {
+                    if (bucket[i].key === key) {
+                        bucket.splice(i, 1);
+                        return; // Key found and removed
+                    }
+                }
+            }
+        }
+
+        // Example usage
+        const hashTable = new HashTable();
+
+        hashTable.insert("name", "John");
+        hashTable.insert("age", 25);
+
+        console.log("Name:", hashTable.get("name")); // Output: John
+        console.log("Age:", hashTable.get("age"));   // Output: 25
+
+        hashTable.remove("age");
+        console.log("Age after removal:", hashTable.get("age")); // Output: undefined
+
+    </script>
+</body>
+
+</html>

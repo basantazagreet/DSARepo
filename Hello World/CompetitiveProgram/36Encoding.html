@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function encodeString(str1) {
+            let str = str1.toLowerCase().split('');
+            // 1st stage of encoding ma swap alternate chars
+            if (str.length % 2 == 0) {
+                for (let i = 0; i < str.length; i = i + 2) {
+                    let temp = str[i];
+                    str[i] = str[i + 1];
+                    str[i + 1] = temp;
+                }
+            } else {
+                for (let i = 0; i < str.length - 1; i = i + 2) {
+                    let temp = str[i];
+                    str[i] = str[i + 1];
+                    str[i + 1] = temp;
+                }
+            }
+            console.log(str.join(''));
+
+            for (let i = 0; i < str.length; i++) {
+                //2nd stage ma swap ascii index with (25-index)
+                let charCode = str[i].charCodeAt(0);
+
+
+                if (charCode >= 65 && charCode <= 90) { // Uppercase letters
+                    str[i] = String.fromCharCode(122 - charCode + 65);
+                } else if (charCode >= 97 && charCode <= 122) { // Lowercase letters
+                    str[i] = String.fromCharCode(122 - charCode + 97);
+                }
+                // For non-alphabetic characters, leave them unchanged
+            }
+
+            return str.join('');
+        }
+        console.log(encodeString('basanta'));
+    </script>
+</body>
+
+</html>

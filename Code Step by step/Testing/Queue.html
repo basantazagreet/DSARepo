@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let data = [10,20,30,40];
+        let len = data.length;
+
+        function enqueue(val){
+            data[len] = val;
+            len++;
+        }
+
+        function dequeue(){
+            for(let i=0; i<data.length; i++){
+                data[i] = data[i+1];
+            }
+            len--;
+            data.length = len;
+        }
+
+        function display(){
+            for(let i=0; i<len; i++){
+                console.log(data[i]);
+            }
+        }
+
+        function front(){
+            return data[0];
+        }
+
+        function rear(){
+            return data[len-1];
+        }
+
+        enqueue(50);
+        display();
+        dequeue();
+        display();
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        obj = {name:"Basanta Sapkota", address:"Gaindakot"};
+        obj.email = 'sehwagbasanta@gmail.com';
+        console.log(obj);
+        delete obj.email;
+        console.log(obj);
+
+        for(x in obj){
+            console.log(obj[x])
+        }
+
+        console.log(Object.keys(obj));
+        console.log(Object.values(obj));
+        console.log(Object.entries(obj));
+
+    </script>
+</body>
+</html>

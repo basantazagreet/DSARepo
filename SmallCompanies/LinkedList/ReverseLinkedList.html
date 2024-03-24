@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Node {
+            constructor(data, next = null) {
+                this.data = data;
+                this.next = next;
+            }
+        }
+
+        class LinkedList {
+            constructor() {
+                this.head = null;
+            }
+
+            insertFirst(data) {
+                this.head = new Node(data, this.head);
+            }
+
+            reverse() {
+                let current = this.head;
+                let prev = null;
+
+                while (current !== null) {
+                    //break vayo list ra aarko list cha
+                    let nextNode = current.next;
+                    //new list ko just direction change vacha
+                    current.next = prev;
+
+                    //pointer change in while loop 2wata ropes ko end
+                    prev = current;
+                    current = nextNode;
+                }
+                //Last element is in prev since nextNode is null
+                this.head = prev;
+            }
+
+            printList() {
+                let current = this.head;
+                while (current !== null) {
+                    console.log(current.data);
+                    current = current.next;
+                }
+            }
+        }
+
+        // Example usage:
+        const linkedList = new LinkedList();
+        linkedList.insertFirst(3);
+        linkedList.insertFirst(2);
+        linkedList.insertFirst(1);
+
+        console.log("Original linked list:");
+        linkedList.printList();
+
+        linkedList.reverse();
+
+        console.log("Reversed linked list:");
+        linkedList.printList();
+
+    </script>
+</body>
+
+</html>

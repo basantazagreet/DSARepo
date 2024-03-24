@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        let data = [1,2,3,4,5,6,7,8,9];
+        let target = 8;
+        let start = 0;
+        let end = data.length -1 ;
+        let position = undefined;
+        
+        //Loop check start sano wa equal samma end ko
+        while(start<=end){
+            //Mid average huna parcha end ra start ko
+            let mid = Math.floor((end + start)/2);
+
+            if(data[mid]>target){
+                //Mid check garna pardaina
+                end = mid-1;                
+            }else if(data[mid]<target){
+                start = mid+1;
+            }else{
+                position = mid;
+                break;
+            }
+        }
+
+        console.log("Position of element"+position)
+    </script>
+</body>
+</html>

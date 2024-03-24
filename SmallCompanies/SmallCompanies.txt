@@ -1,0 +1,70 @@
+    Array and Strings:
+        Find the missing number in an array of 1 to N.
+        Implement an algorithm to reverse a string.
+        Determine if two strings are anagrams.
+        Implement a function to remove duplicates from an unsorted array.
+        Rotate an array to the right by k steps.
+
+    Linked Lists:
+        Reverse a linked list.
+        Detect a cycle in a linked list.
+        Find the middle element of a linked list.
+        Merge two sorted linked lists.
+        Check if a linked list is a palindrome.
+
+    Stacks and Queues:
+        Implement a stack using arrays/linked list.
+        Evaluate a postfix expression using a stack.
+        Implement a queue using stacks.
+        Implement a circular queue.
+        Design a data structure that supports push, pop, top, and retrieving the minimum element in constant time.
+
+    Trees and Binary Search Trees:
+        Find the height of a binary tree.
+        Check if a binary tree is balanced.
+        Implement an algorithm to perform an in-order traversal of a binary tree.
+        Find the lowest common ancestor in a binary search tree.
+        Serialize and deserialize a binary tree.
+
+    Sorting and Searching:
+        Implement binary search.
+        Implement quicksort.
+        Find the kth largest/smallest element in an array.
+        Merge two sorted arrays.
+        Search in a rotated sorted array.
+
+    Hashing(baki cha):
+        Implement a hash table.
+        Find the first non-repeating character in a string.
+        Group anagrams from a list of strings.
+        Implement a trie (prefix tree).
+
+    Dynamic Programming:
+        Calculate the nth Fibonacci number.
+        Find the longest common subsequence of two strings.
+        Knapsack problem.
+        Calculate the edit distance between two strings.
+        Minimum path sum in a 2D grid.
+
+    Graphs:
+        Implement depth-first search (DFS) and breadth-first search (BFS).
+        Detect a cycle in a directed/undirected graph.
+        Find the shortest path in a weighted graph (Dijkstra's or Bellman-Ford).
+        Check if a graph is bipartite.
+        Topological sorting of a directed acyclic graph (DAG).
+
+    Bit Manipulation:
+        Find the single non-repeating element in an array.
+        Count set bits in an integer.
+        Swap two numbers without using a temporary variable.
+        Determine if a number is a power of two.
+
+    Miscellaneous:
+        Implement a basic LRU (Least Recently Used) cache.
+        Design a system for a tiny URL generator.
+        Implement a basic calculator.
+        Implement a simple regular expression matcher.
+
+
+//Find types of while loop and type of recursion by comparing all. 
+//Dimaag ma set hoss

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Graph {
+            constructor() {
+                this.data = {};
+            }
+
+            addVertex(v) {
+                if (!this.data[v]) {
+                    this.data[v] = [];
+                }
+            }
+            addEdge(v1, v2) {
+                if (!this.data[v1]) {
+                    this.addVertex(v1);
+                }
+                if (!this.data[v2]) {
+                    this.addVertex(v2);
+                }
+
+                this.data[v1].push(v2);
+                this.data[v2].push(v1);
+            }
+
+            removeEdge(v1, v2) {
+                this.data[v1] = this.data[v1].filter((item) => {
+                    return item != v2;
+                });
+                this.data[v2] = this.data[v2].filter((item) => {
+                    return item != v1;
+                });
+            }
+
+            removeVertex(v1) {
+                if (!this.data[v1]) {
+                    return;
+                }
+                for (let item of this.data[v1]) {
+                    this.removeEdge(item, v1);
+                }
+                delete this.data[v1];
+            }
+
+            bfs(start_vertex) {
+
+                if (!this.data[start_vertex]) {
+                    return;
+                }
+
+                let queue = [start_vertex];
+                let visited = { [start_vertex]: true };
+
+                while (queue.length > 0) {
+                    let current = queue.shift();
+                    console.log(current);
+
+                    for (let item of this.data[current]) {
+                        if (!visited[item]) {
+                            queue.push(item);
+                            visited[item] = true;
+                        }
+                    }
+                }
+
+            }
+
+
+            dfs(start_vertex, visited = {}) {
+                let result = [];
+                const dfsTraversal = (vertex) => {
+                    if (visited[vertex] || !vertex) {
+                        return;
+                    }
+
+                    result.push(vertex);
+                    visited[vertex] = true;
+
+                    for (const item of this.data[vertex]) {
+                        dfsTraversal(item);
+                    }
+                }
+                dfsTraversal(start_vertex);
+                return result;
+            }
+        }
+
+        const graph = new Graph();
+        graph.addEdge('A', 'B');
+        graph.addEdge('B', 'C');
+        graph.addEdge('B', 'D');
+        graph.addEdge('D', 'E');
+
+        console.log('BFS traversal:');
+        graph.bfs('A');
+        console.log(graph.dfs('A'));
+    </script>
+</body>
+
+</html>

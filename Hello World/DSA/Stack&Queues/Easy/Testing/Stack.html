@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Stack{
+            constructor(){
+                this.data = [];
+            }
+
+            isEmpty(){
+                return this.data.length == 0;
+            }
+            push(val){
+                this.data.push(val);
+            }
+
+            pop(){
+                if(this.isEmpty()){
+                    return null;
+                }else{
+                    this.data.pop();
+                }
+            }
+            peek(){
+                if(this.isEmpty()){
+                    return null;
+                }
+                return this.data[this.data.length-1];
+            }
+
+            size(){
+                return this.data.length;
+            }
+        }
+
+        function removeAdjacentDuplicates(str){
+            let stack = new Stack();
+
+            for (ch of str){
+                if(ch === stack.peek()){
+                    stack.pop();
+                }else{
+                    stack.push(ch);
+                }
+            }
+        }
+
+        console.log(removeAdjacentDuplicates('aabccba'));
+    </script>
+</body>
+</html>

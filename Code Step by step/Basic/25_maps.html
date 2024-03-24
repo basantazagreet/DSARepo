@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        let data = new Map([
+            //Unlike object, keys in map can be of any data type including array
+            ['name', 'Basanta Sapkota'],
+            [100, 'This is hundred'],
+            [true, 'Boolean']
+        ]);
+
+        data.set('name', 'Hemanta Sapkota');
+        console.log(data.get('name'));
+        console.log(data.has(true));
+        console.log(data);
+        
+        for(x of data){
+            console.log(x);
+        }
+        
+        data.forEach((val, key)=>{
+            console.log(val);
+        });
+        
+        data.delete('name');
+        data.clear();
+
+
+    </script>
+</body>
+</html>

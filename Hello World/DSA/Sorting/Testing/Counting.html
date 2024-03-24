@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let data = [1, 44, 3, 45, 22, 4, 5, 8];
+
+        let max = Math.max(...data);
+        let sortedArray = [];
+
+        let arr = new Array(max).fill(0);
+
+        for(let i=0; i<data.length; i++){
+            arr[data[i]]++;
+        }
+
+
+        for(let i=0; i<max; i++){
+            //arr[i] to check if there are values ra push garni i lai
+            while(arr[i]>0){
+            sortedArray.push(i);
+            arr[i]--;
+        }
+        }
+
+        console.log(sortedArray);
+        
+
+    </script>
+</body>
+
+</html>

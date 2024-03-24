@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class QueueUsingStacks {
+            constructor() {
+                this.enqueueStack = [];
+                this.dequeueStack = [];
+            }
+
+            enqueue(value) {
+                this.enqueueStack.push(value);
+            }
+
+            dequeue() {
+                if (this.dequeueStack.length === 0) {
+                    // If the dequeue stack is empty, transfer elements from enqueue stack
+                    while (this.enqueueStack.length > 0) {
+                        this.dequeueStack.push(this.enqueueStack.pop());
+                    }
+                }
+
+                // If both stacks are empty, the queue is empty
+                if (this.dequeueStack.length === 0) {
+                    console.log("Queue is empty");
+                    return undefined;
+                }
+
+                return this.dequeueStack.pop();
+            }
+
+            isEmpty() {
+                return this.enqueueStack.length === 0 && this.dequeueStack.length === 0;
+            }
+
+            size() {
+                return this.enqueueStack.length + this.dequeueStack.length;
+            }
+        }
+
+        // Example usage:
+        const queue = new QueueUsingStacks();
+
+        queue.enqueue(1);
+        queue.enqueue(2);
+        queue.enqueue(3);
+
+        console.log("Dequeued:", queue.dequeue()); // Dequeued: 1
+        console.log("Dequeued:", queue.dequeue()); // Dequeued: 2
+
+        queue.enqueue(4);
+
+        console.log("Is Empty:", queue.isEmpty()); // Is Empty: false
+        console.log("Queue Size:", queue.size());   // Queue Size: 2
+
+
+    </script>
+</body>
+
+</html>

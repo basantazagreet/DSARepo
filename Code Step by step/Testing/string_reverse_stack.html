@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        let data = [];
+        let len = data.length;
+
+        function push(ch){
+            data[len] = ch;
+            len++;
+        }
+
+        function pop(){
+            if(len === 0){
+                console.log("Array empty");
+                return undefined;
+            }
+            let removed_item = data[len-1]
+            len --;
+            data.length=len;
+
+            return removed_item;
+        }
+
+        function reverseString(item){
+            
+            for(let i=0; i<item.length; i++){
+                push(item[i]);
+            }
+            for(let i=0; i<item.length; i++){
+                item[i] = pop();
+            }
+        }
+
+        let name="Basanta";
+        name = name.split('');
+        console.log(name);
+        reverseString(name);
+        console.log(name.join(''));
+    </script>
+</body>
+</html>

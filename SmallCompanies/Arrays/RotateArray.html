@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        function rotateArray(nums, k) {
+            const n = nums.length;
+
+            // Handle cases where k is greater than the array length
+            k = k % n;
+
+            // Reverse the entire array
+            reverseArray(nums, 0, n - 1);
+
+            // Reverse the first k elements
+            reverseArray(nums, 0, k - 1);
+
+            // Reverse the remaining elements
+            reverseArray(nums, k, n - 1);
+        }
+
+        function reverseArray(arr, start, end) {
+            while (start < end) {
+                // Swap elements at start and end indices
+                const temp = arr[start];
+                arr[start] = arr[end];
+                arr[end] = temp;
+
+                // Move indices towards the center
+                start++;
+                end--;
+            }
+        }
+
+        // Example usage:
+        const nums = [1, 2, 3, 4, 5, 6, 7];
+        const k = 3;
+
+        rotateArray(nums, k);
+        console.log("Rotated Array:", nums);
+
+    </script>
+</body>
+
+</html>

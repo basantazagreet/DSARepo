@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Stack {
+            constructor() {
+                this.items = [];
+            }
+
+            isEmpty() {
+                return this.items.length === 0;
+            }
+
+            push(item) {
+                this.items.push(item);
+            }
+
+            pop() {
+                if (this.isEmpty()) {
+                    console.log("Stack Underflow: The stack is empty.");
+                    return null;
+                } else {
+                    return this.items.pop();
+                }
+            }
+
+            peek() {
+                if (this.isEmpty()) {
+                    console.log("Stack is empty.");
+                    return null;
+                } else {
+                    return this.items[this.items.length - 1];
+                }
+            }
+
+            size() {
+                return this.items.length;
+            }
+        }
+
+
+        function isValidParenthesis(input) {
+            let stack = new Stack();
+
+            for(ch of input){
+                if( (ch == '}' && stack.peek() == '{') || 
+                (ch == ']' && stack.peek() == '[') ||
+                (ch == ')' && stack.peek() == '(') && !stack.isEmpty()
+                ){
+                    stack.pop();
+                }else{
+                    stack.push(ch);
+                }
+            }
+
+            return stack.isEmpty();
+        }
+
+        console.log(isValidParenthesis('[{{}}]'));
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        let data = [4,9,11,15,16];
+        let start = 0;
+        let end = data.length;
+        let find = 15;
+        let position = undefined;
+
+        function binarySearch(data, start, end){
+            let mid = Math.floor((start+end)/2);
+            
+                if(data[mid] === find){
+                    position = mid;
+                    return true;
+                }else if(data[mid]<find){
+                    binarySearch(data, mid+1, end)
+                }else{
+                    binarySearch(data, start,mid-1)
+                }      
+        }
+
+        binarySearch(data, start, end);
+        console.log(position);
+    </script>
+</body>
+</html>

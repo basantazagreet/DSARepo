@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        Complexity = O((n+b) * logb(maxx)),
+        where,
+        b=base of representing numbers (10 for decimal number system)
+        maxx=Maximum element in the input array.
+        If, value of maxx is very large
+        Let us limit maxx if maxx < n^c
+        where 'c' is any constant.
+        Then time complexity = O(n*logb(n))
+        
+        */
+
+        /*This function is used to extract the digit at a particular place
+             value. It uses the formula 
+            Math.floor(Math.abs(num) / Math.pow(10, place)) % 10 
+            to get the digit at the specified place.*/
+        function getDigit(num, place) {
+            return Math.floor(Math.abs(num) / Math.pow(10, place)) % 10;
+        }
+
+        /*This function calculates the number of digits in a given number. 
+        It uses Math.log10 to find the logarithm base 10 of the absolute 
+        value of the number, and then adds 1 to get the count of digits.*/
+        function digitCount(num) {
+            if (num === 0) return 1;
+            return Math.floor(Math.log10(Math.abs(num))) + 1;
+        }
+
+        /*This function finds the maximum number of digits in the 
+        entire array by iterating through each element 
+        and keeping track of the maximum digit count using digitCount.*/
+        function mostDigits(arr) {
+            
+            let maxDigits = 0;
+            for (let i = 0; i < arr.length; i++) {
+                maxDigits = Math.max(maxDigits, digitCount(arr[i]));
+            }
+            return maxDigits;
+        }
+
+        // Radix Sort implementation
+        /*    It starts by finding the maximum number of
+         digits in the input array using mostDigits.
+    Then, it enters a loop that iterates for each digit place (from the 
+    least significant to the most significant).
+    Inside the loop, it initializes an array of buckets (buckets) where 
+    each bucket corresponds to a digit (0 to 9).
+    It iterates through the input array, extracts the current digit 
+    using getDigit, and places the number in the corresponding bucket.
+    After processing all numbers for the current digit place,
+     it concatenates the buckets to form a new array (arr), and the 
+     process continues for the next digit place.
+    This process is repeated until all digit places have been considered.*/
+        function radixSort(arr) {
+            const maxDigits = mostDigits(arr);
+
+            for (let k = 0; k < maxDigits; k++) {
+                const buckets = Array.from({ length: 10 }, () => []);
+
+                for (let i = 0; i < arr.length; i++) {
+                    const digit = getDigit(arr[i], k);
+                    buckets[digit].push(arr[i]);
+                }
+
+                //Bucket 1 , 2, 3..10 concat hudai jancha 
+                //aarko k ma aafai sort hudai jancha 
+                //new array bandai jancha aani tesmai kaam huncha pheri
+                arr = [].concat(...buckets);
+            }
+
+            return arr;
+        }
+
+        // Example usage:
+        const unsortedArray = [170, 45, 75, 90, 802, 24, 2, 66];
+        const sortedArray = radixSort(unsortedArray);
+
+        console.log("Unsorted Array:", unsortedArray);
+        console.log("Sorted Array:", sortedArray);
+
+    </script>
+</body>
+
+</html>

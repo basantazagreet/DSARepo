@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        left = 2i+1
+        right = 2i+2
+        parent = (i-1)/2
+        ...................
+        1)heapifyUp index bata root tira sorting gardai jancha
+        2)minHeapify left ra right ma jun sano cha teslai swap gardai tala jancha
+        3)delete garda last sanga swap garni aani heapifyUp garni
+        4)extractMin ma data[0] nikalne, last ko el lai top ma assign garni 
+         aani minHeapify call tala lai
+
+
+        */
+        class MinHeap {
+            constructor() {
+                this.data = [10, 20, 15, 40, 50, 100, 25, 45];
+            }
+
+            push(val) {
+                this.data.push(val);
+                this.heapifyUp(this.data.length - 1);
+            }
+
+            heapifyUp(index) {
+                while (index > 0) {
+                    let rootIndex = Math.floor((index - 1) / 2);
+
+                    if (this.data[index] < this.data[rootIndex]) {
+                        let temp = this.data[index];
+                        this.data[index] = this.data[rootIndex];
+                        this.data[rootIndex] = temp;
+
+                        index = rootIndex;
+                    } else {
+                        break;
+                    }
+                }
+            }
+
+            minHeapify(index) {
+                //mathi bata tala structure banaudai aaune
+
+                this.data = minHeapifyHelper(this.data, index);
+
+                function minHeapifyHelper(data, index) {
+                    let left = index * 2 + 1;
+                    let right = index * 2 + 2;
+                    //root set first ma, swap garda base case(equal ma)
+                    //pugyo ki herna parcha
+                    let smallest = index;
+
+                    //smaller ko index right ma ki left ma index nikalne
+                    if (left < data.length && data[left] < data[smallest]) {
+                        smallest = left;
+                    }
+
+                    if (right < data.length && data[right] < data[smallest]) {
+                        smallest = right;
+                    }
+
+                    if (smallest !== index) {
+                        //pahila swap & recursion suru
+                        [data[index], data[smallest]] = [data[smallest], data[index]];
+                        //smallest bata pheri loop chalcha
+                        return minHeapifyHelper(data, smallest);
+                    }
+
+                    return data;
+                }
+            }
+
+            //pop garna ni parcha extract garisakesi
+            extractMin() {
+                if (this.data.length === 0) {
+                    return; // or handle the case as needed
+                } else if (this.data.length === 1) {
+                    return this.data.pop();
+                } else {
+                    let minElement = this.data[0];
+                    //pop vako item matlab vayena so no swap done
+                    this.data[0] = this.data.pop();
+                    this.minHeapify(0);
+                    return minElement;
+                }
+            }
+
+            //replace item in index with new val and heapify up
+            decreaseKey(val, index) {
+                this.data[index] = val;
+
+                while (index > 0) {
+                    let root = Math.floor((index - 1) / 2);
+
+                    if (this.data[index] < this.data[root]) {
+                        let temp = this.data[index];
+                        this.data[index] = this.data[root];
+                        this.data[root] = temp;
+
+                        index = root;
+                    } else {
+                        break;
+                    }
+                }
+            }
+
+            delete(index) {
+                if (index < 0 || index >= this.data.length) {
+                    // Invalid index, handle the error as needed
+                    return;
+                }
+
+                // Swap the element to be deleted with the last element
+                [this.data[index], this.data[this.data.length - 1]] = [this.data[this.data.length - 1], this.data[index]];
+
+                // Remove the last element (which is now the element to be deleted)
+                let deletedElement = this.data.pop();
+
+                // If the deleted element was not the last element, perform heapify
+                if (index < this.data.length) {
+                    //top down heapify
+                    this.heapify(index);
+                }
+
+                return deletedElement;
+            }
+
+            heapify(index) {
+                // Similar to minHeapify, adjust the heap from the given index
+                let left = index * 2 + 1;
+                let right = index * 2 + 2;
+                let smallest = index;
+
+                if (left < this.data.length && this.data[left] < this.data[smallest]) {
+                    smallest = left;
+                }
+
+                if (right < this.data.length && this.data[right] < this.data[smallest]) {
+                    smallest = right;
+                }
+
+                if (smallest !== index) {
+                    [this.data[index], this.data[smallest]] = [this.data[smallest], this.data[index]];
+                    this.heapify(smallest);
+                }
+            }
+
+        }
+
+
+        //Bottommost right parent node: (size-2)/2;
+        // Example usage:
+        const minHeap = new MinHeap();
+        minHeap.push(5);
+        console.log(minHeap.data); // The heap now includes the value 5 and maintains the heap property.
+
+    </script>
+</body>
+
+</html>

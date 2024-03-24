@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function findLargest(arr,max, n){
+            if(n<0){
+                return max;
+            }
+            if(arr[n] > max){
+                max = arr[n];
+            }
+           return findLargest(arr,max,n-1);
+        }
+        let arr= [66,4,9,10,2,25,88];
+        console.log(findLargest(arr,0,arr.length-1));
+
+        function findGreatest(arr, n){
+            if(n == 1){
+                return arr[0];
+            }
+            return Math.max(findGreatest(arr, n-1) , arr[n])
+        }
+
+        let arr2= [66,4,9,10,2,25,88];
+        console.log(findGreatest(arr2, arr2.length-1));
+    </script>
+</body>
+</html>

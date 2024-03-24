@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Treenode {
+            constructor(val) {
+                this.left = null;
+                this.right = null;
+                this.data = val;
+            }
+        }
+        class BST {
+            constructor(val) {
+                this.root = new Treenode(val);
+            }
+
+            addNode(val) {
+                let current = new Treenode(val);
+                let root = this.root;
+                this.insertNode(root, current);
+            }
+
+            insertNode(root, current) {
+                if (current.data > root.data) {
+                    if (root.right == null) {
+                        root.right = current;
+                    } else {
+                        insertNode(root.right, current);
+                    }
+                } else {
+                    if (root.left == null) {
+                        root.left = current;
+                    } else {
+                        insertNode(root.left, current);
+                    }
+                }
+            }
+
+            inOrderTraversal(root) {
+                if (root) {
+                    inOrderTraversal(root.left);
+                    console.log(root.data);
+                    inOrderTraversal(root.right);
+                }
+            }
+
+            findHeight(root) {
+                if (root == null) {
+                    return 0;
+                } else {
+                    let left = findHeight(root.left);
+                    let right = findHeight(root.right);
+
+                    let height = Math.max(left, right);
+                }
+
+            }
+
+            isBalanced(root) {
+                if (root == null) {
+                    return true;
+                }
+
+                let leftHeight = findHeight(root.left);
+                let rightHeight = findHeight(root.right);
+
+                if (Math.abs(leftHeight - rightHeight) > 1) {
+                    return false;
+                }
+
+                return isBalanced(root.right) && isBalanced(root.left);
+            }
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>

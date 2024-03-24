@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class TreeNode {
+            constructor(val) {
+                this.data = val;
+                this.left = null;
+                this.right = null;
+            }
+        }
+        class BinarySearchTree {
+            constructor(val) {
+                this.root = new TreeNode(val);
+            }
+
+            addNode(val) {
+                let new_node = new TreeNode(val);
+                if (this.root == null) {
+                    this.root = new_node;
+                } else {
+                    this.insertNode(this.root, new_node)
+                }
+            }
+
+            insertNode(root, new_node) {
+                if (new_node.data > root.data) {
+                    if (root.right == null) {
+                        root.right = new_node;
+                    } else {
+                        this.insertNode(root.right, new_node);
+                    }
+                } else {
+                    if (root.left == null) {
+                        root.left = new_node;
+                    } else {
+                        this.insertNode(root.left, new_node);
+                    }
+                }
+            }
+        }
+
+        function findHeight(root) {
+            if (root === null) {
+                return 0;
+            } else {
+                const leftHeight = findHeight(root.left);
+                const rightHeight = findHeight(root.right);
+
+                return Math.max(leftHeight, rightHeight) + 1;
+            }
+        }
+
+        function inOrderTraversal(root) {
+
+            if (root) {
+                inOrderTraversal(root.left)
+                console.log(root.data);
+                inOrderTraversal(root.right);
+            }
+        }
+
+        /*you need to ensure that the heights of the left 
+        and right subtrees of any node differ by at most 1,
+         and the left and right subtrees are also balanced.*/
+        function isBalanced(root) {
+            if (root === null) {
+                return true;  // An empty tree is balanced
+            }
+
+            const leftHeight = findHeight(root.left);
+            const rightHeight = findHeight(root.right);
+
+            if (Math.abs(leftHeight - rightHeight) > 1) {
+                return false;
+            }
+
+            return isBalanced(root.left) && isBalanced(root.right);
+        }
+
+        function lowestCommonAncestor(root, p, q) {
+            if (!root) {
+                return null;
+            }
+
+            while (root) {
+                if (p.data < root.data && q.data < root.data) {
+                    root = root.left;
+                } else if (p.data > root.data && q.data > root.data) {
+                    root = root.right;
+                } else {
+                    // p and q are on different sides, or one of them is equal to the current root
+                    return root;
+                }
+            }
+
+            return null; // In case the tree is empty
+        }
+
+
+        const bst = new BinarySearchTree(1);
+        bst.addNode(2);
+        bst.addNode(3);
+        bst.addNode(4);
+        bst.addNode(5);
+        bst.addNode(6);
+        bst.addNode(7);
+        console.log(bst);
+        console.log(findHeight(bst.root));
+        inOrderTraversal(bst.root);
+        console.log(isBalanced(bst.root));
+
+
+    </script>
+</body>
+
+</html>

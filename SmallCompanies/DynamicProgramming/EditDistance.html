@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function editDistance(str1, str2) {
+            if (str1.length === 0) {
+                return str2.length;
+            }
+
+            if (str2.length === 0) {
+                return str1.length;
+            }
+
+            const cost = str1[0] === str2[0] ? 0 : 1;
+
+            const deletion = editDistance(str1.slice(1), str2) + 1;
+            const insertion = editDistance(str1, str2.slice(1)) + 1;
+            const substitution = editDistance(str1.slice(1), str2.slice(1)) + cost;
+
+            /*minimum number of operations needed to transform 
+            the current substrings into each other.*/
+            return Math.min(deletion, insertion, substitution);
+        }
+
+    </script>
+</body>
+
+</html>

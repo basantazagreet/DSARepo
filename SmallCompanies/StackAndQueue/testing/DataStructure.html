@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*Design a data structure that supports push, pop, top, and 
+        retrieving the minimum element in constant time.*/
+        class DataStructure {
+            constructor() {
+                this.minItems = [];
+                this.items = [];
+            }
+
+            push(val) {
+                this.items.push(val);
+                if (val < this.minItems[this.minItems.length - 1] ) {
+                    this.minItems.push(val);
+                }
+            }
+
+            pop() { 
+                let val = this.items[this.items.length - 1];
+                if(val== this.minItems[this.minItems.length -1]){
+                    this.minItems.pop();
+                }
+
+                this.items.pop();
+                return val;
+            }
+
+            top() { }
+
+            min() { 
+                if (this.minItems.length === 0) {
+                    console.log("Stack is empty.");
+                    return undefined;
+                }
+
+                return this.minItems[this.minItems.length - 1];
+            }
+        }
+    </script>
+</body>
+
+</html>

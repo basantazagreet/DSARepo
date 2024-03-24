@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Node {
+    constructor(data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class Stack {
+    constructor() {
+        this.top = null;
+    }
+
+    // Check if the stack is empty
+    isEmpty() {
+        return this.top === null;
+    }
+
+    // Push an element onto the stack
+    push(data) {
+        const newNode = new Node(data);
+        newNode.next = this.top;
+        this.top = newNode;
+    }
+
+    // Pop an element from the stack
+    pop() {
+        if (this.isEmpty()) {
+            console.log("Stack Underflow: The stack is empty.");
+            return null;
+        } else {
+            const poppedData = this.top.data;
+            this.top = this.top.next;
+            return poppedData;
+        }
+    }
+
+    // Peek at the top element of the stack without removing it
+    peek() {
+        if (this.isEmpty()) {
+            console.log("Stack is empty.");
+            return null;
+        } else {
+            return this.top.data;
+        }
+    }
+
+    // Display the elements of the stack
+    display() {
+        let current = this.top;
+        while (current) {
+            console.log(current.data);
+            current = current.next;
+        }
+    }
+}
+
+// Example usage:
+const myStack = new Stack();
+
+myStack.push(1);
+myStack.push(2);
+myStack.push(3);
+
+console.log("Stack elements:");
+myStack.display();
+
+
+console.log("Peek:", myStack.peek());
+
+const poppedItem = myStack.pop();
+console.log("Popped item:", poppedItem);
+
+console.log("Stack elements after pop:");
+myStack.display();
+
+    </script>
+</body>
+</html>

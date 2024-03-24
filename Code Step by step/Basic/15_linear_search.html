@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" placeholder="Enter value to search" id="search-val">
+    <button onclick="find()">Search</button>
+
+    <script>
+
+        let data = [10,20,30,40,50];
+        let pos = undefined;
+        
+        function find(){
+            let val = document.getElementById('search-val').value;
+        for(let i=0; i<data.length; i++){
+            if(data[i] == val){
+                pos = i;
+                break;
+            }
+        }
+        if(pos){
+            console.log('Element found at position :'+pos);
+        }else{
+            console.log("Element not found");
+        }
+    }
+
+    </script>
+</body>
+</html>

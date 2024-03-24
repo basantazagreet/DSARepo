@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //Set is just like an array but can't have duplicate values.
+        let data = new Set([
+            "Basanta", "Hemanta", "Diwas"
+        ]);
+       console.log( data.has('Basanta'));
+       data.add('Raju');
+       data.delete('Diwas');
+       console.log(data);
+
+       for(x of data){
+        console.log(x);
+       }
+
+       data.forEach((val)=>{
+        console.log(val);
+       })
+
+       console.log(data.entries());
+    </script>
+</body>
+</html>

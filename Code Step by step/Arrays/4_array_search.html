@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" placeholder="Enter item to search" id="item">
+    
+    <button onclick="searchItem()">Search using custom algorithm</button>
+    <button onclick="searchItemBuiltIn()">Search using built in method</button>
+
+    <script>
+
+        let data = [2, 33, 67, 47, 9, 7, 33, 67];
+        console.log(data);
+        function searchItem() {
+
+            let item = document.getElementById('item').value;
+
+            let search_item = parseInt(item);
+
+            for (let i = 0; i < data.length; i++) {
+                if (data[i] == search_item) {
+                    console.log("Item found in position: " + i);
+                    break;
+                }
+            }
+
+
+        }
+
+        function searchItemBuiltIn(){
+            let item = document.getElementById('item').value;
+
+            let search_item = parseInt(item);
+            console.log("Item found in"+data.indexOf(search_item));
+        }
+
+
+    </script>
+</body>
+
+</html>

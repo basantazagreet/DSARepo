@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let data = [13, 11, 40,30,12,25,33,15,7];
+
+        for(let i=0; i<data.length; i++){
+            let j = i-1;
+            let curr = data[i];
+            //backloop ho
+            //curr data[j] sanga compare garni ho
+            while(j>=0 && data[j]>curr ){
+                //j lai right tira sarne ho
+                data[j+1] = data[j]
+                j--;
+            }
+
+            //j sanga swap but -- so j+1 sanga
+            data[j+1] = curr;
+
+        }
+        console.log(data);
+    </script>
+</body>
+</html>

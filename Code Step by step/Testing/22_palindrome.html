@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        function checkPalindrome(str1) {
+            let arr1=str1.split("")
+            let start = 0;
+            let end = arr1.length - 1;
+
+            while (start < end) {
+                if(arr1[start] !== arr1[end])
+                {
+                    return false;
+                }
+
+                start++;
+                end--;
+            }
+            return true;
+        }
+       console.log(checkPalindrome('level'));
+    </script>
+</body>
+
+</html>

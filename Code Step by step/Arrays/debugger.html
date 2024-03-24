@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+
+        //Open debug console and set breakpoints and see the flow by pressing arrow or seeing next item
+        function tailRecursion(x){
+            if(x>0){
+                tailRecursion(x-1);
+            }
+            console.log(x)
+        }
+        tailRecursion(5);
+    </script>
+</body>
+</html>

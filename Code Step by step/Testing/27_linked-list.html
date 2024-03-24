@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class LinkedList {
+            constructor(val) {
+                this.head = {
+                    data: val,
+                    next: null
+                };
+                this.tail = this.head;
+                this.size = 1;
+            }
+
+            appendNode(val) {
+                let new_node = {
+                    data: val,
+                    next: null
+                };
+                this.tail.next = new_node;
+                this.tail = new_node;
+                this.size++;
+            }
+
+            traversing() {
+                let current_node = this.head;
+                let counter = 1;
+                while (counter <= this.size) {
+                    console.log(current_node);
+                    current_node = current_node.next;
+                    counter++;
+                }
+            }
+            deleteNode(index) {
+                let lead = this.head;
+                if (index == 1) {
+                    this.head = this.head.next;
+                } else {
+                    let counter = 1;
+                    //index vanda 1 step aagadi samma pugna parcha ra minus 1 cha
+                    while (counter<index-1) {
+                        lead = lead.next; 
+                        counter++;
+                    }
+                    //back node lai separate variable ma rakhna parcha
+                    let back_node = lead.next.next ;
+                    lead.next = back_node;
+                }
+                this.size--;
+
+            }
+            addNode(index, val) {
+                let lead_node = this.head;
+                let current_node = {
+                    data: val,
+                    next:null
+                };
+
+                if(index == 1){
+                    this.head.next = current_node;
+                }else{                    
+                    let counter = 1;
+                    while(counter<index-1){
+                        lead_node = lead_node.next;
+                        counter++;
+                    }
+                    let back_node = lead_node.next;
+                    lead_node.next = current_node;
+                    lead_node.next.next = back_node;
+                    
+                }
+                this.size++;
+
+            }
+            searchNode(val) {
+                let lead = this.head;
+                let loop = true;
+                let result = undefined;
+                while(loop){
+                    if(lead.data == val){
+                        result=lead;
+                        loop = false;
+                    }
+                    if(lead.next==null){
+                        console.log("Not Found");
+                        loop=false;
+                    }
+                    lead = lead.next;
+                }
+                return result;
+
+            }
+        }
+        let linked_list = new LinkedList(1);
+        linked_list.appendNode(2);
+        linked_list.appendNode(3);
+        linked_list.appendNode(4);
+        linked_list.appendNode(5);
+        console.log(linked_list);
+        linked_list.deleteNode(3);
+        console.log('Deleted')
+        linked_list.addNode(3,22);
+        console.log(linked_list.searchNode(4));
+    </script>
+</body>
+
+</html>

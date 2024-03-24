@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class LinkedList {
+            constructor(val) {
+                this.head = {
+                    data: val,
+                    next: null
+                }
+                this.tail = this.head;
+                this.size = 1;
+            }
+
+            appendNode(val) {
+                let new_node = {
+                    data: val,
+                    next: null
+                }
+                //Next data set to new_node in the current last node
+                this.tail.next = new_node;
+
+                //Tail variable(Remember its outside the linked list) moves by one step just referencing to that new node
+                this.tail = new_node;
+                this.size++;
+            }
+
+
+            traversing() {
+                let current_node = this.head;
+                let counter = 1;
+                while (counter <= this.size) {
+                    console.log(current_node);
+                    //Node moves 1 index right
+                    current_node = current_node.next;
+                    counter++;
+                }
+            }
+
+
+            deleteNode(index) {
+                let lead = this.head;
+                if (index == 1) {
+                    //Head deleted and ref also passed
+                    this.head = this.head.next;
+                } else {
+                    let count = 1;
+                    //minus one because lead is one step before the node we want to delete
+                    while (count < index - 1) {
+                        //Node moves 1 index right
+                        lead = lead.next;
+                        count++;
+                        //At the end of the loop, the lead node is just one step before index
+                    }
+                    //Assign next of next node to a var so that it can be moved 1 step forward later
+                    let next_node = lead.next.next;
+                    //Deleting next node of lead by assigning a value
+                    lead.next = next_node;
+                }
+                this.size--;
+            }
+
+            addNode(index, value){
+                let lead = this.head;
+                let current_node = {
+                    data: value,
+                    next:null
+                }
+                if(index==1){
+                    this.head.next = current_node;
+                }else{
+                    let counter = 1;
+                    while(counter < index - 1){
+                        lead = lead.next;
+                        counter++;
+                    }
+                    //lead ko next ma currrentnode insert ra current ko next ma temp jun ma pahila ko next thyo tyo jancha
+                    let temp = lead.next;
+                    lead.next = current_node;
+                    lead.next.next=temp;
+                }
+                this.size++;
+            }
+
+            searchNode(val){
+                let lead = this.head;
+                let loop = true;
+                let result = undefined;
+
+                while(loop){
+                    lead= lead.next;
+                    if(lead.next == null){
+                        console.log('Not found')
+                        loop=false;
+                    }
+                    if(lead.data == val){
+                        result = lead;
+                        loop=false;
+                        
+                    }
+                }
+                console.log(result)
+            }
+
+        }
+        linked_list = new LinkedList(100);
+        linked_list.appendNode(200);
+        linked_list.appendNode(300);
+        linked_list.appendNode(400);
+        linked_list.appendNode(500);
+        linked_list.appendNode(600);
+        linked_list.appendNode(700);
+        linked_list.addNode(5,450);
+        linked_list.searchNode(800);
+        // console.log(linked_list);
+    </script>
+</body>
+
+</html>

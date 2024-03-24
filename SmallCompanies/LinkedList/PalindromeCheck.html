@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class ListNode {
+            constructor(value, next = null) {
+                this.value = value;
+                this.next = next;
+            }
+        }
+
+        function isPalindrome(head) {
+            // Helper function to reverse a linked list
+            function reverseList(node) {
+                let prev = null;
+                let current = node;
+
+                while (current !== null) {
+                    let next = current.next;
+                    current.next = prev;
+                    prev = current;
+                    current = next;
+                }
+
+                return prev;
+            }
+
+            // Find the middle of the linked list
+            let slowPointer = head;
+            let fastPointer = head;
+
+            while (fastPointer !== null && fastPointer.next !== null) {
+                slowPointer = slowPointer.next;
+                fastPointer = fastPointer.next.next;
+            }
+
+            // Reverse the first half
+            let reversedSecondHalf = reverseList(slowPointer);
+
+            // Compare the first and reversed first halves
+            let firstHalf = head;
+            let secondHalf = reversedSecondHalf;
+
+            while (secondHalf !== null) {
+                if (firstHalf.value !== secondHalf.value) {
+                    return false;
+                }
+
+                firstHalf = firstHalf.next;
+                secondHalf = secondHalf.next;
+            }
+
+            return true;
+        }
+
+        // Example usage:
+        // Construct a palindrome linked list: 1 -> 2 -> 3 -> 3 -> 2 -> 1
+        const palindromeList = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(3, new ListNode(2, new ListNode(1))))));
+
+        console.log(isPalindrome(palindromeList)); // Output: true
+
+    </script>
+</body>
+
+</html>

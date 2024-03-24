@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class LinkedList {
+            constructor(val) {
+                this.head = {
+                    data: val,
+                    next: null
+                }
+                this.tail = this.head;
+                this.size = 1;
+            }
+
+            addNode(val) {
+                let next_node = {
+                    data: val,
+                    next: null
+                }
+                this.tail.next = next_node;
+
+                this.tail = next_node;
+                this.size++;
+            }
+
+            findMiddleElement(){
+                let slowPointer=this.head;
+                let fastPointer=this.head;
+
+                while(slowPointer!==null && fastPointer!==null){
+                    slowPointer = slowPointer.next;
+                    fastPointer = fastPointer.next.next;
+                }
+                return slowPointer.data;
+            }
+
+
+        };
+    </script>
+</body>
+
+</html>

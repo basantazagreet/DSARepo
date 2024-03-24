@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        let data = [4, 8, 9, 13];
+        let find = 13;
+        let start = 0;
+        let end = data.length-1;
+        let position = undefined;
+
+        //start left ma vaye end ko
+        while(start<=end){
+            let mid = Math.floor((start+end)/2);
+            
+            if(data[mid] === find){
+                position = mid;
+                break;
+                //Sorted array ho so mid item if left ma vaye find ko .
+            }else if(data[mid]<find){
+                //right half ma search
+                start = mid + 1 ;
+            }else{
+                //Left half ma search
+                end = mid - 1;
+            }
+        }
+
+        console.log(position);
+
+    </script>
+</body>
+</html>

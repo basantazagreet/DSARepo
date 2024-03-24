@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        obj = {}
+        string = 'basanta';
+        let max_occuring_char = '';
+
+        for(let i=0; i<string.length; i++){
+            current_char = string[i];
+
+            if(!obj[current_char]){
+                obj[current_char] = 0;
+            }
+            obj[current_char] ++;
+
+            if(max_occuring_char=="" || obj[max_occuring_char] < obj[current_char]){
+                max_occuring_char = current_char;
+            }
+            
+        }
+        console.log(max_occuring_char);
+
+        
+    </script>
+</body>
+</html>

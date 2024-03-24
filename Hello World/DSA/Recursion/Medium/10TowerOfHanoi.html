@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*Larger disc cant be above smaller, 1 disc only at a time., output
+        n(no. of steps required)*/
+        function TOHHelper(n, source, destination, aux, countObj) {
+            if (n > 0) {
+                /*(n-1) discs goes to auxiliary from source, 
+                with help of destination*/
+                TOHHelper(n - 1, source, aux, destination, countObj);
+                /*n disc goes from source to destination*/
+                console.log("Move"+n+ "from"+source+" to "+destination);
+                countObj.count++;
+                /*(n-1) discs goes from auxiliary to destination with the help of source*/
+                TOHHelper(n - 1, aux, destination, source, countObj);
+
+            }
+        }
+        function TOH(n, source, destination, aux) {
+            var countObj = {count: 0};
+            TOHHelper(n, source, destination, aux, countObj);
+            return countObj.count;
+
+        }
+        // Example usage
+        var numberOfDiscs = 3;
+        var sourcePeg = 'A';
+        var destinationPeg = 'C';
+        var auxiliaryPeg = 'B';
+
+        var steps = TOH(numberOfDiscs, sourcePeg, destinationPeg, auxiliaryPeg);
+        console.log("Total steps: " + steps);
+        /*Base condition n = 1 vaye source to dest, count++ and return*/
+    </script>
+</body>
+
+</html>

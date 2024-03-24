@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //Find the longest common subsequence of two strings.
+        function longestCommonSubsequence(str1, str2) {
+            function lcsHelper(i, j) {
+                // Base case: If either of the strings is empty
+                if (i === 0 || j === 0) {
+                    return "";
+                }
+
+                // If the last characters of both strings match
+                //equal vaye both pointer sarne ra char callstack ma store garne
+                if (str1[i - 1] === str2[j - 1]) {
+                    return lcsHelper(i - 1, j - 1) + str1[i - 1];
+                }
+
+                // If the last characters don't match, backtrack,
+                //i ko pointer sardai hereko str1 ma aani j ko pointer 
+                //sardai hereko str2 ma.
+                const lcs1 = lcsHelper(i - 1, j);
+                const lcs2 = lcsHelper(i, j - 1);
+
+                // Return the longer of the two subsequences
+                //jun call stack badhi chalecha tyo return garne
+                return lcs1.length > lcs2.length ? lcs1 : lcs2;
+            }
+
+            // Start the recursive function
+            return lcsHelper(str1.length, str2.length);
+        }
+
+        // Example usage
+        const str1 = "ABCD";
+        const str2 = "ACDF";
+        const result = longestCommonSubsequence(str1, str2);
+        console.log(result); // Output: "ACD"
+
+    </script>
+</body>
+
+</html>

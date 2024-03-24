@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let data = [3,7,12,15,19,22,14];
+
+        function sumOfArray(arr, n){
+            if(n<0){
+                return n; 
+            }else{
+                return (arr[n] + sumOfArray(arr, n-1));
+            }
+        }
+
+        console.log(sumOfArray(data, data.length-1));
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        
+
+        function isAnagram(str1, str2) {
+            obj1 = {};
+
+            for (ch of str1) {
+                obj1[ch] = (obj1[ch] || 0) + 1;
+            }
+
+            for (ch of str2) {
+                if (!obj1[ch]) {
+                    return false;
+                }
+                obj1[ch]--
+            }
+
+            return true;
+        }
+
+        console.log(isAnagram('silent','listena'))
+    </script>
+</body>
+
+</html>

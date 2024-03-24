@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class UnionFind{
+            constructor(size){
+                this.parent = new Array(size);
+                this.rank = new Array(size);
+                for(let i=0; i<size; i++){
+                    this.parent[i] = i;
+                    this.rank[i] = 0;
+                }
+            }
+
+            //root return garna
+            find(x){
+                if(x !== this.parent[x]){
+                    this.parent[x] = this.find(this.parent[x]);
+                }
+
+                return this.parent[x];
+            }
+
+            union(x,y){
+                let xRoot = this.find(x);
+                let yRoot = this.find(y);
+
+                if(this.rank[xRoot] > this.rank[yRoot]){
+                    this.parent[yRoot] = xRoot;
+                }else if(this.rank[yRoot] > this.rank[xRoot]){
+                    this.parent[xRoot] = yRoot;
+                }else{
+                    this.parent[yRoot] = xRoot;
+                    this.rank[xRoot]++;
+                }
+            }
+
+            isConnected(x,y){
+                return this.parent[x] == this.parent[y];
+            }
+        }
+
+        // Example usage:
+        const uf = new UnionFind(5); // Creates a union-find data structure with 5 elements
+
+        uf.union(0, 1); // Merge elements 0 and 1
+        uf.union(2, 3); // Merge elements 2 and 3
+        console.log(uf.isConnected(0, 1)); // Output: true, since 0 and 1 are connected
+        console.log(uf.isConnected(0, 2)); // Output: false, since 0 and 2 are in different sets
+        uf.union(1, 2); // Merge sets containing elements 1 and 2
+        console.log(uf.isConnected(0, 2)); // Output: true, since 0 and 2 are now connected after the union
+
+    </script>
+</body>
+
+</html>

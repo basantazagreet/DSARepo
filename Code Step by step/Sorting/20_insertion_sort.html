@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+        //Back loop run garera element ko true location patta laune ra tya lyayera insert gardine
+
+        let data = [10, 3, 44, 65, 23, 32, 9];
+        console.log(data);
+
+        //Aafai sanga compare garna pardaina
+        for (let i = 1; i < data.length; i++) {
+            current_element = data[i];
+
+            //Backloop lai starts from i-1 and runs on front section
+            let j = i - 1;
+
+            //run till zero and if data[j] is bigger, if it was smaller or equal than front section is sorted
+            while (j >= 0 && data[j] > current_element) {
+                //loop vitra ko current_element ma j ko val halne, 
+                data[j + 1] = data[j];
+                j--;
+
+                //loop ko last ma (j+1) ma euta redundant value bascha j=-1 vaye loop break huncha
+            }
+
+            //Backloop ko first element(pachadi bata first) ma lyayera redundant thau ma current element insert gareko
+            data[j + 1] = current_element;
+        }
+
+        console.log(data);
+    </script>
+</body>
+
+</html>

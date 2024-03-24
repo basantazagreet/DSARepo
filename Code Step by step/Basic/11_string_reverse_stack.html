@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Difficulty level Medium</h2>
+
+    <script>
+
+        let data =[];
+        let len = data.length;
+
+        function  push(val){
+            data[len] = val;
+            len+=1;
+        }
+
+        function pop(){
+            if (len === 0) {
+                console.log("Array empty");
+            return undefined; // Return undefined when the array is empty
+        }
+            //pop array resize garera garecha ra removed item pani chaincha so return gareko
+            let removedItem = data[len-1] 
+            len-=1;
+            data.length = len;
+            return removedItem;
+        }
+
+        //Temporarily data ma vacha kaam last ma item mai gacha so doesnt matter
+
+        function stringReverse(item){
+            for(let i=0; i<item.length;i++){
+                push(item[i]); //data ma sabai push hune vayo just copy gareko
+            }
+
+
+            for(let i=0; i<item.length;i++){
+                item[i] = pop(); //item ma assigned hune vayo data[] ko end bata pop hudai
+            }
+            
+        }
+
+        let name = "Basanta";
+        name = name.split("");
+        console.log(name);
+        stringReverse(name);
+        console.log(name.join(""));
+
+    </script>
+</body>
+
+</html>

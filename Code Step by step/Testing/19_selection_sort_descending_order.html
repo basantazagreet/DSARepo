@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let data = [5,22,13,16,10,29,9];
+
+
+        for(let i=0; i<data.length; i++){
+            let current_index = i;
+            //i+1 bata suru ho
+            for(let j=i+1; j<data.length; j++){
+                if(data[j]>data[current_index]){
+                    //current index is now to swap index
+                    current_index = j;
+                }
+            }
+
+            let temp = data[i];
+            data[i] = data[current_index];
+            data[current_index] = temp;
+        }
+
+        console.log(data);
+    </script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        class Node {
+            constructor(val) {
+                this.data = val;
+                this.next = null;
+                this.prev = null;
+            }
+        }
+        class DoublyLinkedList {
+            constructor() {
+                this.head = null;
+                this.tail = null
+            }
+
+            append(data) {
+                let new_node = new Node(data);
+
+                if (this.head === null) {
+                    this.head = new_node;
+                    this.tail = new_node;
+                } else {
+                    new_node.prev = this.tail;
+                    this.tail.next = new_node;
+                    this.tail = new_node;
+                }
+            }
+
+            prepend(val) {
+                let new_node = new Node(val);
+                if (this.head === null) {
+                    this.head = new_node;
+                    this.tail = new_node;
+                } else {
+                    new_node.next = this.head;
+                    this.head.prev = new_node;
+                    this.head = new_node;
+                }
+            }
+
+            addAtIndex(index, val) {
+                if (index < 0) {
+                    console.log("Index cannot be negative");
+                    return;
+                }
+                let count = 1;
+                let lead_node = this.head;
+                let new_node = new Node(val);
+                if (lead_node === null) {
+                    this.append(val);
+                }
+                if (index === 1) {
+                    this.prepend(val);
+                }
+
+                while (count <= index - 1 && lead_node !== null) {
+                    lead_node = lead_node.next;
+                    count++;
+                }
+
+                let back_node = lead_node.next;
+                 if (lead_node.next === null) {
+                    lead_node.next = new_node;
+                    new_node.prev = lead_node;
+                    new_node.next = null;
+                    this.tail = new_node;
+                }
+                else {
+                    new_node.prev = lead_node;
+                    new_node.next = back_node;
+                    lead_node.next = new_node;
+                    back_node.prev = new_node;
+                }
+
+            }
+
+            //chatgpt way
+            insertAtPosition(position, data) {
+                const newNode = new Node(data);
+
+                if (position === 1) {
+                    newNode.next = this.head;
+                    if (this.head !== null) {
+                        this.head.prev = newNode;
+                    }
+                    this.head = newNode;
+                    return;
+                }
+
+                let current = this.head;
+                let count = 1;
+
+                while (count < position - 1 && current !== null) {
+                    current = current.next;
+                    count++;
+                }
+
+                if (current === null) {
+                    console.log("Invalid position. List not long enough.");
+                    return;
+                }
+
+                newNode.next = current.next;
+                newNode.prev = current;
+                if (current.next !== null) {
+                    current.next.prev = newNode;
+                }
+                current.next = newNode;
+            }
+
+            displayForward() {
+                let current_node = this.head;
+                while (current_node !== null) {
+                    console.log(current_node.data);
+                    current_node = current_node.next;
+                }
+            }
+
+            displayBackward() {
+                let current_node = this.tail;
+                while (current_node !== null) {
+                    console.log(current_node.data);
+                    current_node = current_node.prev;
+                }
+            }
+
+
+            linkedListInsertion(list){
+                let current_node = list.head;
+                while(current_node !== null){
+                    if(current_node.data === 1){
+                        this.append(current_node.prev.data);
+                    }else if(current_node.data ===0){
+                        this.prepend(current_node.prev.data);
+                    }
+                    current_node = current_node.next;
+                }
+            }
+        }
+        // Example usage:
+        const doublyList = new DoublyLinkedList();
+        doublyList.append(9);
+        doublyList.append(0);
+        doublyList.append(5);
+        doublyList.append(1);
+        doublyList.append(6);
+        doublyList.append(1);
+        doublyList.append(2);
+        doublyList.append(0);
+        doublyList.append(5);
+        doublyList.append(0);
+
+        let newList = new DoublyLinkedList();
+        newList.linkedListInsertion(doublyList);
+        console.log(newList);
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //key characteristic of a circular queue is that when the rear pointer reaches the end of the array,
+        // it wraps around to the beginning. This makes efficient use of the available space.
+        //Max size reach gare complete circle
+        class CircularQueue{
+
+            constructor(size){
+                this.max_size = size;
+                this.rear = -1;
+                this.front = -1;
+                this.items = new Array(size);
+                this.len = 0;
+            }
+            //front bata niskincha rear bata push garincha, max size reach gare circular banaincha.
+            enqueue(val){
+                if(this.len != this.max_size){
+                    //Max size reach gare complete circle natra rear badcha
+                    if(this.rear == this.max_size){
+                        this.rear = 0;
+                    }else{
+                        // rear updated before inserting (Space reserve gareko)
+                        this.rear++;
+                    }
+                    //entering data
+                    this.items[this.rear] = val;
+                    this.len++;
+
+                    //First ma insert garda front pani update garne natra front stays same while inserting
+                    if(this.front == -1){
+                        this.front = this.rear;
+                    }
+                }
+            }
+            //front bata niskincha, 
+            dequeue(){
+                if(this.len != 0){
+                    //Front thau bata delete gareko
+                    this.items[this.front] = null;
+
+                    //Max size bata ghatdai cha vane break circle and set front to zero
+                    if(this.front == this.max-1){
+                        this.front = 0;
+                    }else{
+                        //Front updated after deleting value, front sareko 1 step
+                        this.front++
+                    }
+
+                    this.len--;
+                }else{
+                    //Queue empty vaye front ra rear -1 position huncha
+                    this.front = -1;
+                    this.rear = -1;
+                    console.log("Queue is empty cannot dequeue")
+                }
+            }
+            
+            display(){
+                console.log(this.items);
+            }
+        }
+        var queue = new CircularQueue(5);
+        queue.enqueue(10);
+        queue.enqueue(20);
+        queue.enqueue(30);
+        queue.enqueue(40);
+        queue.enqueue(50);
+        queue.display();
+        
+        
+
+    </script>
+</body>
+</html>

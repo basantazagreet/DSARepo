@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*Leetcode Q no. 901) Online Stock Span (Medium)
+        harek day ko price diyecha, find the span.
+        No. of previous consecutive days which has value smaller or 
+        equal to today price.
+        */
+        class StockSpanner {
+            constructor() {
+                this.prices = [];
+                this.spans = [];
+            }
+
+            next(price) {
+                let span = 1;
+                while (this.prices.length > 0 && price >= this.prices[this.prices.length - 1]) {
+                   //span jodne ra pachadi sano vaye pop gardai jane
+                    span += this.spans.pop();
+                    this.prices.pop();
+                }
+
+                //current price ra accumulated span push garne stack ma
+                this.prices.push(price);
+                this.spans.push(span);
+
+                return span;
+            }
+        }
+
+        // Example usage:
+        const stockSpanner = new StockSpanner();
+        console.log(stockSpanner.next(100)); // Output: 1
+        console.log(stockSpanner.next(80));  // Output: 1
+        console.log(stockSpanner.next(60));  // Output: 1
+        console.log(stockSpanner.next(70));  // Output: 2
+        console.log(stockSpanner.next(60));  // Output: 1
+        console.log(stockSpanner.next(75));  // Output: 4
+        console.log(stockSpanner.next(85));  // Output: 6
+
+
+    </script>
+</body>
+
+</html>

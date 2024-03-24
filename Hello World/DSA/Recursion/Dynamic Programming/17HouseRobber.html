@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*Consecutive ghar ma chorna painna, alarm bajcha. Max
+        paisa chorne algorithm. n means number of houses chosen
+        to be stolen. (aagadi ko)*/
+
+        function rob(nums, n){
+            if(n<=0) return 0;
+            return Math.max(
+                /*Not robbing the current house and moving on to the previous one.
+                Robbing the current house and moving on to the house before the previous one.*/
+                rob(nums, n-1), nums[n-1] + rob(nums, n-2)
+            );
+        }
+
+        function houseRobber(nums, n, memo = {}) {
+            if (n <= 0) return 0;
+            if (memo[n] !== undefined) {
+                return memo[n];
+            }
+            memo[n] = Math.max(houseRobber(nums, n - 1, memo), nums[n - 1] + houseRobber(nums, n - 2, memo));
+            return memo[n];
+        }
+
+        // Example usage:
+        const nums = [2, 7, 9, 3, 1];
+        const n = nums.length;
+        const result = houseRobber(nums, n);
+        console.log(result);
+
+    </script>
+</body>
+
+</html>

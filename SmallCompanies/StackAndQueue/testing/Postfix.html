@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        // Example usage:
+        const postfixExpression = "23*5+"; //Output 11
+        const result = evaluatePostfix(postfixExpression);
+        console.log("Result of postfix expression", postfixExpression, ":", result);
+        */
+
+        class Stack {
+            constructor(max) {
+                this.max = max;
+                this.data = [];
+                this.len = this.data.length;
+            }
+
+            push(val) {
+                this.data.push(val);
+                this.len++;
+            }
+
+            pop() {
+                if (this.isEmpty()) {
+                    console.log("Empty, cannot pop");
+                    return null;
+                }
+                return this.data.pop();
+            }
+            isEmpty() {
+                return this.data.length == 0;
+            }
+        }
+        function evaluatePostfix(expression) {
+            let stack = new Stack();
+
+            for (let i = 0; i < expression.length; i++) {
+                let symbol = expression[i];
+
+                if (!isNaN(symbol)) {
+                    stack.push(parseFloat(symbol));
+                } else {
+                    let operand1 = stack.pop();
+                    let operand2 = stack.pop();
+
+                    switch (symbol) {
+                        case '+':
+                            stack.push(operand1 + operand2);
+                            break;
+                        case '-':
+                            stack.push(operand1 - operand2);
+                            break;
+                        case '*':
+                            stack.push(operand1 * operand2);
+                            break;
+                        case '/':
+                            stack.push(operand1 / operand2);
+                            break;
+                        default:
+                            return null;
+                            break;
+                    }
+
+                }
+
+            }
+
+            return stack.pop();
+        }
+        const postfixExpression = "23*5+"; //Output 11
+        const result = evaluatePostfix(postfixExpression);
+        console.log("Result of postfix expression", postfixExpression, ":", result);
+    </script>
+</body>
+
+</html>

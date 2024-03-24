@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let data = [40,30,12,25,33,15,7];
+
+        for(let i=0; i<data.length; i++){
+            let to_swap = i;
+            for(let j=i+1; j<data.length; j++){
+                if(data[j] < data[to_swap]){
+                    to_swap = j ;
+                }
+            }
+
+            [data[i], data[to_swap]] = [data[to_swap], data[i] ];
+        }
+
+        console.log(data);
+    </script>
+</body>
+</html>

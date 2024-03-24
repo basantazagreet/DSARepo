@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let data = new Set([
+            'hello', 24, 'Basanta'
+        ]);
+        console.log(data.has('hello'));
+        data.add('Hemanta');
+        data.delete(24);
+
+        console.log(data.entries());
+
+        for(x of data)
+            console.log(x)
+
+        data.forEach((val)=>{
+            console.log(val)
+        })
+
+        
+    </script>
+</body>
+</html>

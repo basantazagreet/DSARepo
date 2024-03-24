@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Node{
+            constructor(val){
+                this.data= val,
+                this.next = null
+            }
+        }
+        class LinkedList{
+            constructor(val){
+                this.head = new Node(val);
+            }
+            addElement(val){
+                let new_node = new Node(val);
+                if(!this.head){
+                    this.head = new_node;
+                }else{
+                    let current = this.head;
+                    while(current.next!==null){
+                        current=current.next;
+                    }
+                    current.next = new_node;
+                }
+            
+            }
+            reverseLinkedList(){
+                let current= this.head;
+                let prev=null;
+                while(current.next!==null){
+                    let split = current.next;
+                    current.next = prev;
+
+                    prev = current;
+                    current=split;
+                }
+                this.head=prev;
+            }
+        }
+    </script>
+</body>
+</html>

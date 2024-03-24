@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        let arr= [1,2,3,4,5,7];
+        let n = arr.length+1;
+        let expected_sum = (n*(n+1))/2;
+
+        let sum = 0;
+        for(let i=0; i<arr.length; i++){
+            sum = sum + arr[i];
+        }
+        let missing_num = expected_sum - sum;
+        console.log( missing_num);
+    </script>
+</body>
+</html>

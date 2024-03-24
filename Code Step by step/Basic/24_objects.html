@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let user={
+            name: "Basanta Sapkota",
+            email: "basantazagreet@gmail.com",
+            age: 29,
+            getAge:function(){
+                return this.age;
+            }
+        }
+        user.contact = 9999999;
+        delete user.name;
+        console.log(user);
+        console.log(user.getAge());
+
+        //key x and value is user[x]
+        for(x in user){
+            console.log(x);
+            console.log(user[x]);
+        }
+
+        //Get all keys in array format
+        console.log(Object.keys(user));
+
+        //Get all values in array format
+        console.log(Object.values(user));
+
+        //Key values bound in single array
+        console.log(Object.entries(user));
+
+    </script>
+</body>
+</html>

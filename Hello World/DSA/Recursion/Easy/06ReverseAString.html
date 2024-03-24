@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // let str1 = 'basanta';
+        // let arr = str1.split('');
+
+        // function reverseAString(str, start, end) {
+        //     if (start >= end) {
+        //         return str;
+        //     }
+        //     let temp = str[start];
+        //     str[start] = str[end];
+        //     str[end] = temp;
+
+        //     return reverseAString(str, start + 1, end - 1);
+        // }
+
+        // let arr1 = reverseAString(arr, 0, arr.length - 1);
+        // console.log(arr1.join(''));
+
+        function reverseAString(str) {
+            if (str === "") {
+                return str;
+            } else {
+                return reverseAString(str.substring(1)) + str[0];
+            }
+        }
+
+        let str2 = 'basanta';
+        let reversedString = reverseAString(str2);
+        console.log(reversedString);
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Node {
+            constructor(data, next = null) {
+                this.data = data;
+                this.next = next;
+            }
+        }
+
+        class LinkedList {
+            constructor() {
+                this.head = null;
+            }
+
+            insertFirst(data) {
+                this.head = new Node(data, this.head);
+            }
+
+            hasCycle() {
+                let slow = this.head;
+                let fast = this.head;
+
+                while (fast !== null && fast.next !== null) {
+                    slow = slow.next;
+                    fast = fast.next.next;
+
+                    // If the pointers meet, there is a cycle
+                    if (slow === fast) {
+                        return true;
+                    }
+                }
+
+                // If the fast pointer reaches the end, there is no cycle
+                return false;
+            }
+        }
+
+        // Example usage:
+        const linkedList = new LinkedList();
+        linkedList.insertFirst(3);
+        linkedList.insertFirst(2);
+        linkedList.insertFirst(1);
+
+        // Uncomment the line below to create a cycle in the linked list
+        // linkedList.head.next.next.next = linkedList.head;
+
+        if (linkedList.hasCycle()) {
+            console.log("The linked list has a cycle.");
+        } else {
+            console.log("The linked list does not have a cycle.");
+        }
+
+    </script>
+</body>
+
+</html>

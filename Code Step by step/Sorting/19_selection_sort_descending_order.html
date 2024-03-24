@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let data = [10, 3, 44, 65, 23, 32, 9];
+        console.log(data);
+        for(let i = data.length-1; i>=0; i--){
+            let current_val_index = i;
+            for(let j = i-1; j>=0; j--){
+                if(data[j] < data[current_val_index] ){
+                    current_val_index = j;
+                    //current val index is now to swap val index
+                }
+            }
+
+            //swap val in i with to_swap_val_index
+
+            temp = data[current_val_index];
+            data[current_val_index] = data[i];
+            data[i]=temp;
+        }
+        console.log(data);
+
+
+    </script>
+</body>
+</html>

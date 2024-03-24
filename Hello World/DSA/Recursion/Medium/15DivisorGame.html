@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function divisorGame(N) {
+            // Base case: Alice loses when N is 1
+            if (N === 1) {
+                return false;
+            }
+
+            // Try all possible x such that N % x === 0
+            for (let x = 1; x < N; x++) {
+                if (N % x === 0) {
+                    // If there is a divisor x, Alice can play optimally by choosing x
+                    // The new value of N will be N - x, and the game continues recursively
+                    if (!divisorGame(N - x)) {
+                        return true; // Alice wins
+                    }
+                }
+            }
+
+            // If there is no winning move for Alice, Bob wins
+            return false;
+        }
+
+        // Example usage:
+        console.log(divisorGame(2)); // Output: true (Alice wins)
+        console.log(divisorGame(3)); // Output: false (Alice loses)
+
+    </script>
+</body>
+
+</html>

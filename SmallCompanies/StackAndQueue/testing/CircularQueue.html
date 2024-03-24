@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class CircularQueue {
+            constructor(max) {
+                this.max_size = max;
+                this.front = -1;
+                this.rear = 0;
+                this.items = new Array(max);
+                this.size = 0;
+            }
+
+            enqueue(val) {
+                if (this.isFull()) {
+                    console.log('Queue full cannot enqueue')
+                    return undefined;
+                } else {
+                    this.items[this.rear] = val;
+                    this.rear = (this.rear + 1) % this.max_size;
+                    this.size++;
+                }
+            }
+            dequeue() {
+                if (this.isEmpty()) {
+                    console.log('Queue empty cannot dequeue');
+                    return undefined;
+                } else {
+                    let val = this.items[this.front];
+                    this.front = (this.front + 1) % this.max_size;
+                    this.size--;
+                    return val;
+                }
+            }
+            isEmpty() {
+                return this.items.length == 0;
+            }
+            isFull() {
+                return this.items.length == this.max_size;
+            }
+            front(){
+                if(this.isEmpty()){
+                    return undefined;
+                }else{
+                    return this.items[this.front];
+                }
+            }
+            rear(){
+                if(this.isEmpty()){
+                    return undefined;
+                }else{
+                    return this.items[this.rear];
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

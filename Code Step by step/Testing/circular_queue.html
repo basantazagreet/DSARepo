@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class CircularQueue {
+            constructor(val) {
+                this.max_size = val;
+                this.front = -1;
+                this.rear = -1;
+                this.len = 0;
+                this.data = [];
+            }
+
+            enqueue(val) {
+                if (this.len != this.max_size) {
+                    if (this.rear == this.max_size) {
+                        this.rear = 0;
+                    }else{
+                        this.rear++;
+                    }
+
+                    this.data[this.rear] = val;
+                    this.len++;
+                    if (this.front == -1) {
+                        this.front = this.rear
+                    }
+                }
+            }
+
+            dequeue() {
+                if (this.len != 0) {
+                    this.front = null;
+
+                    if (this.front == this.max_size) {
+                        this.front = 0;
+                    } else {
+
+                        this.front++;
+                    }
+                    this.len--;
+
+                } else {
+                    this.front = -1;
+                    this.rear = -1;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

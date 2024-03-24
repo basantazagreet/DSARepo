@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <h1>Insertion in an array, open console for more info</h2>
+        <input type="text" id="position" placeholder="Enter position where you wanna insert">
+        <input type="text" id="item" placeholder="Enter item value to insert">
+        <button onclick="insertInArray()">Insert item in array using DS</button><br>
+        <button onclick="insertInArrayUsingSplice()">Insert item in array using Splice method</button><br>
+        <span style="color:red; display: none;" id="error-span">Invalid position or element</span>
+
+
+
+        <script>
+
+            function insertInArray() {
+
+                let main_array = [10, 23, 33, 2, 5, 88, 36];
+
+
+                let el = document.getElementById('item').value;
+                let new_el = parseInt(el);
+                let new_position = document.getElementById('position').value;
+
+
+                if (new_position<0 || new_position >= main_array.length || isNaN(el) || isNaN(new_position)) {
+                    document.getElementById('error-span').style.display='inline';
+                } else {
+
+                    //i starts from far right
+                    for (let i = main_array.length - 1; i >= 0; i--) {
+
+                        //Position vanda right ka lai 1 step right sareko
+                        if (i >= new_position) {
+                            main_array[i + 1] = main_array[i];
+
+                            //position aayesi insert gareko
+                            if (i == new_position) {
+                                main_array[i] = new_el;
+                            }
+                        }
+                    }
+
+                    console.log(main_array);
+                }
+            }
+
+            function insertInArrayUsingSplice() {
+                let main_array = [10, 23, 33, 2, 5, 88, 36];
+
+
+                let el = document.getElementById('item').value;
+                let new_el = parseInt(el);
+                let new_position = document.getElementById('position').value;
+
+
+                if (new_position<0 || new_position >= main_array.length || isNaN(el) || isNaN(new_position)) {
+                    document.getElementById('error-span').style.display = 'inline';
+                } else {
+
+                    main_array.splice(new_position, 0, new_el);
+
+                    console.log(main_array);
+                }
+            }
+
+
+        </script>
+</body>
+
+</html>

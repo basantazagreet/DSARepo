@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //ways to climb stairs, 1step,2steps. Permutation of these
+        function climbStairs(n, memo = {}) {
+            if (n <= 2) {
+                return n;
+            }
+            if (!memo.hasOwnProperty(n)) {
+                memo[n] = climbStairs(n - 1, memo) + climbStairs(n - 2, memo);
+            }
+            return memo[n];
+        }
+
+        console.log(climbStairs(5));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+    <script>
+        /*
+        Select min element from right and swap with i
+        Time complexity: O(n^2)
+        */
+
+        let items = [1, 55, 3, 21, 45, 34];
+        console.log(items);
+        let current_val_index;
+        for (let i = 0; i < items.length; i++) {
+            //Select item to iterate (j loop) with
+            current_val_index = i;
+            for (let j = i + 1; j < items.length; j++) {
+
+                //find item to swap from the loop
+                if (items[j] < items[current_val_index]) {
+                    current_val_index = j;
+                    //current_val_index is now to_swap_val_index
+                }
+            }
+
+            //j loop sakiyesi swap garni ho to_swap_val_index
+            let temp = items[current_val_index];
+            items[current_val_index] = items[i];
+            items[i] = temp;
+
+            //Loop continues with new index i
+        }
+
+        console.log(items);
+    </script>
+</body>
+
+</html>

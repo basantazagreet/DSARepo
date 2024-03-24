@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function isPowerOfTwo(number) {
+            // Ensure the number is positive
+            if (number <= 0) {
+                return false;
+            }
+
+            // Use bitwise AND to check if only one bit is set to 1
+            return (number & (number - 1)) === 0;
+        }
+
+        // Example usage:
+        console.log(isPowerOfTwo(8));   // Output: true (2^3 = 8)
+        console.log(isPowerOfTwo(16));  // Output: true (2^4 = 16)
+        console.log(isPowerOfTwo(12));  // Output: false
+        console.log(isPowerOfTwo(0));   // Output: false
+        console.log(isPowerOfTwo(-8));  // Output: false
+
+    </script>
+</body>
+
+</html>

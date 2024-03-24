@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function fibonacciDP(n) {
+            if (n <= 1) {
+                return n;
+            }
+
+            // Create an array to store Fibonacci numbers
+            const fibArr = new Array(n + 1);
+
+            // Initialize the first two Fibonacci numbers
+            fibArr[0] = 0;
+            fibArr[1] = 1;
+
+            // Calculate Fibonacci numbers from 2 to n
+            for (let i = 2; i <= n; i++) {
+                fibArr[i] = fibArr[i - 1] + fibArr[i - 2];
+            }
+
+            return fibArr[n];
+        }
+
+        // Example usage
+        const n = 10;
+        const result = fibonacciDP(n);
+        console.log(`The ${n}th Fibonacci number is: ${result}`);
+
+    </script>
+</body>
+
+</html>

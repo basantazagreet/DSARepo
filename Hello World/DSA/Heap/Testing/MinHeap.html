@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        left = 2i+1
+        right = 2i+2
+        parent = (i-1)/2
+        */
+        class MinHeap {
+            constructor() {
+                this.data = [10, 20, 15, 40, 50, 100, 25, 45];
+            }
+
+            push(val) {
+                this.data.push(val);
+                this.heapifyUp(this.data.length - 1);
+            }
+
+            heapifyUp(index) {
+                while (index > 0) {
+                    let root = Math.floor((index - 1) / 2);
+
+                    if (this.data[index] < this.data[root]) {
+                        [this.data[index], this.data[root]] = [this.data[root], this.data[index]];
+                        index = root;
+                    } else {
+                        break;
+                    }
+                }
+            }
+
+            minHeapify(index) {
+                this.data = minHeapifyHelper(this.data, index);
+
+                function minHeapifyHelper(data, index) {
+                    let left = 2 * index + 1;
+                    let right = 2 * index + 1;
+
+                    let smallest = index;
+
+                    if (left < this.data.length && this.data[left] < this.data[smallest]) {
+                        smallest = left;
+                    }
+                    if (right < this.data.length && this.data[right] < this.data[smallest]) {
+                        smallest = right;
+                    }
+
+                    if (smallest != index) {
+                        [this.data[smallest], this.data[index]] = [this.data[index], this.data[smallest]];
+                        minHeapifyHelper(data, smallest)
+                    }
+
+                    return data;
+                }
+            }
+
+            
+            extractMin(){
+                if(this.data.length == 0){
+                    return;
+                }else if(this.data.length == 1){
+                    return this.data.pop();
+                }else{
+                    let min = this.data[0];
+                    this.data[0] = this.data.pop();
+                    minHeapify(0);
+
+                    return min;
+                }
+                
+            }
+
+            decreaseKey(val,index){
+                this.data[index] = val;
+
+                this.heapifyUp(index);
+            }
+
+            delete(index){
+                if(index<0 || index>=this.data.length){
+                    return;
+                }
+
+                [this.data[index], this.data[this.data.length-1]]= [this.data[this.data.length-1],this.data[index]];
+
+                if(index<this.data.length){
+                    this.heapify(index);
+                }
+            }
+
+            heapify(index){
+                let left = 2*index + 1;
+                let right = 2*index + 2;
+
+                let smallest = index;
+
+                if(this.data[left] < this.data[smallest] && left<this.data.length){
+                    smallest = left;
+                }
+                if(this.data[right] < this.data[smallest] && right<this.data.length){
+                    smallest = right;
+                }
+
+
+                if(smallest!== index){
+
+                    [this.data[smallest], this.data[index]] = [this.data[index],this.data[smallest]];
+
+                    this.heapify(smallest);
+                }
+
+
+            }
+
+        }
+
+        let min = new MinHeap();
+        min.push(22);
+        min.decreaseKey(11,3);
+        min.delete(5);
+        console.log(min);
+    </script>
+</body>
+
+</html>

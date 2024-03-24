@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function findMissingNumber(arr, N) {
+            // Calculate the sum of the numbers from 1 to N
+            const expectedSum = (N * (N + 1)) / 2;
+
+            // Calculate the actual sum of the array elements
+            const actualSum = arr.reduce((sum, num) => sum + num, 0);
+
+            // The missing number is the difference between the expected sum and the actual sum
+            const missingNumber = expectedSum - actualSum;
+
+            return missingNumber;
+        }
+
+        // Example usage:
+        const array = [1, 2, 4, 5, 6];
+        const N = 6; // Assuming the array should contain numbers from 1 to 6
+
+        const missingNumber = findMissingNumber(array, N);
+        console.log("Missing number:", missingNumber);
+
+    </script>
+</body>
+
+</html>

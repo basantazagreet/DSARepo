@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Node {
+            constructor(val) {
+                this.left = null;
+                this.right = null;
+                this.data = val;
+            }
+        }
+
+        class BST {
+            constructor() {
+                this.root = null;
+            }
+
+            isEmpty() {
+                return this.root === null;
+            }
+
+            makeTree(val) {
+
+                let new_node = new Node(val);
+                if (!this.root) {
+                    this.root = new_node;
+                } else {
+                    this.insertInBST(this.root, val);
+                }
+            }
+
+            insertInBST(root, val) {
+                let new_node = new Node(val);
+                if (val > root.data) {
+                    if (root.right === null) {
+                        root.right = new_node;
+                    } else {
+                        this.insertInBST(root.right, val);
+                    }
+                } else {
+                    if (root.left === null) {
+                        root.left = new_node;
+                    } else {
+                        this.insertInBST(root.left, val);
+                    }
+                }
+            }
+
+
+            search(root, val) {
+                //logic fail: root null maile left ra right if block ma halethe
+                if(root === null){
+                    return false;
+                }
+
+                if (val > root.data) {
+                   return this.search(root.right, val)
+                } else if (val < root.data) {
+                    return this.search(root.left, val)
+                } else {
+                    return true;
+                }
+            }
+
+
+            preOrder(root) {
+                if(root){
+                    console.log(root);
+                    this.preOrder(root.left);
+                    this.preOrder(root.right);
+                }
+             }
+            inOrder(root) {
+                if(root){
+                    this.preOrder(root.left);
+                    console.log(root);
+                    this.preOrder(root.right);
+                }
+             }
+            postOrder(root) {
+                if(root){
+                    this.preOrder(root.left);
+                    this.preOrder(root.right);
+                    console.log(root);
+                }
+             }
+
+
+            bfsTraversing() { 
+                let queue = [];
+                queue.push(this.root);
+                while(queue.length>0){
+                    let root = queue.shift();
+                    if(root.left){
+                        queue.push(root.left);
+                    }
+                    if(root.right){
+                        queue.push(root.right);
+                    }
+                    console.log(root.data);
+                }
+            }
+
+
+            findMin(root) { 
+                if(root === null){
+                    return;
+                }
+                if(root.left !== null){
+                    return this.findMin(root.left);
+                }else{
+                    return root;
+                }
+
+            }
+
+            findMax(root) { 
+                if(root===null){
+                    return ;
+                }
+                if(root.right){
+                    return this.findMax(root.right);
+                }else{
+                    return root;
+                }
+            }
+
+            removeItem(val){
+            
+                if(this.root.data === val){
+                    this.root = null;
+                }else{
+                    this.root = this.deleteNode(this.root,val)
+                }
+            }
+
+            deleteNode(root,val){
+                if(val>root.data){
+                    root.right =  this.deleteNode(root.right, val);
+                }
+                else if(val<root.data){
+                    root.left =  this.deleteNode(root.left, val);
+                }
+                else{
+                    if( !root.left && !root.right){
+                        return null;
+                    }else if(!root.left){
+                        return root.right;
+                    }else if(!root.right){
+                        return root.left;
+                    }else{
+                        root.data = findMin(root.right);
+                       root.right =  this.deleteNode(root.right, root.data);
+                        //findmin from right, delete it and put it in the current root
+                    }
+                }
+                return root;
+            }
+        }
+
+        let bst = new BST(
+
+        
+        );
+        bst.makeTree(20);
+        bst.makeTree(50);
+        bst.makeTree(30);
+        bst.makeTree(8);
+        bst.makeTree(23);
+        console.log(bst.search(bst.root, 20));
+        console.log(bst.findMin(bst.root));
+        console.log(bst.findMax(bst.root));
+        bst.removeItem(30);
+        console.log(bst);
+    </script>
+</body>
+
+</html>

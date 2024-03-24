@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let data = new Map([
+            [25, "Basanta Sapkota"],
+            [true, "Diwas Kandel"],
+            ["Hemanta", "Hemanta Sapkota"],
+        ]);
+
+        data.set(25, "Nobody");
+        console.log(data.get(true));
+        console.log(data.has(25));
+
+        for(x of data)
+        console.log(x);
+
+        data.forEach((val,key)=>{
+            console.log(val+key);
+        })
+        data.delete('Hemanta');
+        console.log(data);
+    </script>
+</body>
+</html>

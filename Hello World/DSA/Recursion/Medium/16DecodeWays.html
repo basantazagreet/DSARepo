@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function numDecodingsRecursive(s, index = 0) {
+            const n = s.length;
+
+            // Base case: if the index reaches the end of the string, there is one valid decoding
+            if (index === n) {
+                return 1;
+            }
+
+            // If the current digit is '0', it cannot be decoded alone
+            if (s[index] === '0') {
+                return 0;
+            }
+
+            // Count the number of decodings for the current digit
+            let ways = numDecodingsRecursive(s, index + 1);
+
+            // Check if the current and next digits form a valid mapping (between '10' and '26')
+            if (index + 1 < n && parseInt(s.slice(index, index + 2), 10) <= 26) {
+                ways += numDecodingsRecursive(s, index + 2);
+            }
+
+            return ways;
+        }
+
+        // Example usage:
+        const s1 = "12";
+        console.log(numDecodingsRecursive(s1)); // Output: 2 (Two ways: "AB" or "L")
+
+        const s2 = "226";
+        console.log(numDecodingsRecursive(s2)); // Output: 3 (Three ways: "BZ", "VF", or "BBF")
+
+    </script>
+</body>
+
+</html>
