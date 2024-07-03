@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        total time complexity = O(N+K) where,
+        maximum element is 'K'
+        */
+        let data = [1,44,3,45,22,4,5,8];
+
+        let max = Math.max(...data);
+
+        let countingArr = new Array(max).fill(0);
+        let sortedArray = [];
+
+        for(let i=0; i<data.length;i++){
+            countingArr[data[i]]++;
+        }
+
+        for(let i=0; i<=max; i++){
+            while(countingArr[i]>0){
+                sortedArray.push(i);
+                countingArr[i]--;
+            }
+        }
+
+        console.log(sortedArray);
+    </script>
+</body>
+</html>

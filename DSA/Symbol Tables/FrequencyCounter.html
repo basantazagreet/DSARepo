@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function frequencyCounter(arr) {
+            let counter = {};
+
+            for (const item of arr) {
+                counter[item] = (counter[item] || 0) + 1;
+            }
+
+            return counter;
+
+        }
+        // Example usage:
+        const arr = [1, 2, 3, 4, 5, 1, 2, 3, 1, 2];
+        const frequencies = frequencyCounter(arr);
+        console.log(frequencies);
+    </script>
+</body>
+
+</html>

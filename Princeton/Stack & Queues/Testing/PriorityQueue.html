@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class PriorityQueue {
+            constructor(){
+                this.data = [];
+            }
+
+            enqueue(val, priority){
+                let item = {val, priority};
+                let added = false;
+                for(let i=0; i<this.data.length; i++){
+                    if(this.data[i].priority>item.priority){
+                        this.data.splice(i, 0, item);
+                        added = true;
+                        break;
+                    }
+                }
+                if(!added){
+                    this.data.push(item);
+                }
+
+            }
+
+            printQueue(){
+                for(let i=0; i<this.data.length; i++){
+                    console.log("Item:"+this.data[i].val+"Priority"+this.data[i].priority )
+                }
+            }
+
+            front(){
+                if(this.data.length == 0){
+                    return;
+                }
+                return this.data[0];
+            }
+
+            dequeue(){
+                if(this.data.length == 0){
+                    return;
+                }
+                return this.data.shift();
+            }
+
+
+        }
+        // Example usage:
+        const priorityQueue = new PriorityQueue();
+
+        priorityQueue.enqueue("A", 2);
+        priorityQueue.enqueue("B", 1);
+        priorityQueue.enqueue("C", 3);
+
+        console.log("Queue:", priorityQueue.printQueue()); // Output: B A C
+
+        console.log("Front:", priorityQueue.front()); // Output: { element: 'B', priority: 1 }
+
+        console.log("Dequeued:", priorityQueue.dequeue()); // Output: { element: 'B', priority: 1 }
+        console.log("Queue after dequeue:", priorityQueue.printQueue()); // Output: A C
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        class UnionFind{
+            constructor(n){
+                this.parent = new Array(n);
+                this.rank = new Array(n);
+                for(let i=0; i<n; i++){
+                    this.parent[i]=i;
+                    this.rank[i] = 0;
+                }
+            }
+
+            find(x){
+                if(this.parent[x] !== x){
+                    this.parent[x] = this.find(this.parent[x])
+                }
+                return this.parent[x]
+            }
+
+            union(x,y){
+                let rootX = this.find(x);
+                let rootY = this.find(y);
+
+                if(rootX === rootY){
+                    return false;
+                }
+
+                if(rank[rootX] > rank[rootY]){
+                    this.parent[rootY] = rootX; 
+                }
+                else if(rank[rootX] < rank[rootY]){
+                    this.parent[rootX] = rootY; 
+                }else{
+                    this.parent[rootY] = rootX; 
+                    rank[rootX]++;
+                }
+
+                return true;
+            }
+
+
+        }
+
+
+
+
+        function isCycle(graph,n){
+            let uf = new UnionFind(n);
+
+            for(let i=0; i<graph.length; i++){
+                let [src, dest] = graph[i];
+
+
+                if(!uf.union(src, dest)){
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+
+
+
+
+
+        const graph = [
+            [0, 1],
+            [1, 2],
+            [2, 3],
+            [3, 0],
+        ];
+
+        console.log(isCycle(graph, 4));
+    </script>
+</body>
+</html>

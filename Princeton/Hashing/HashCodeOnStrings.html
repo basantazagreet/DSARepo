@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function simpleStringHash(str) {
+            let hash = 0;
+            if (str.length === 0) return hash;
+
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+
+                /*common operation used in hash functions to mix the bits of 
+                the hash value and incorporate a new character into the hash.*/
+
+                // <<5 :multiplies the hash value by 32 and 
+                // - hash :It introduces a form of "avalanche effect" where small changes 
+                //in the input result in significantly different hash values.
+                hash = (hash << 5) - hash + char;
+
+                //bitwise AND with itself
+                // Convert to 32bit integer
+
+                /*When you perform a bitwise AND operation with a value and itself 
+                (value &= value), you're effectively retaining only those bits 
+                that are set in both instances of the value, effectively doing nothing
+                 to change the value itself, but ensuring that it remains unaltered.*/
+                hash &= hash;
+            }
+
+            return hash;
+        }
+
+        // Example usage:
+        const inputString = "Hello, World!";
+        const hashCode = simpleStringHash(inputString);
+        console.log("Hash code for", inputString, ":", hashCode);
+
+    </script>
+</body>
+
+</html>

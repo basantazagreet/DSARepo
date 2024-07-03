@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /** Leetcode Question no. 1971 (Easy) Find if path exists in graph
+ * @param {number[][]} graph
+ * @return {boolean}
+ */
+        var validPath = function (n, edges, start, end) {
+            // Create an adjacency list representation of the graph
+            const adjacencyList = {};
+            for (const [u, v] of edges) {
+                if (!adjacencyList[u]) adjacencyList[u] = [];
+                if (!adjacencyList[v]) adjacencyList[v] = [];
+                adjacencyList[u].push(v);
+                adjacencyList[v].push(u);
+            }
+
+            // BFS to check if there is a path from start to end
+            const queue = [start];
+            const visited = new Set();
+
+            while (queue.length > 0) {
+                const currentVertex = queue.shift();
+
+                if (currentVertex === end) {
+                    return true; // Path found
+                }
+
+                visited.add(currentVertex);
+
+                for (const neighbor of adjacencyList[currentVertex] || []) {
+                    if (!visited.has(neighbor)) {
+                        queue.push(neighbor);
+                    }
+                }
+            }
+
+            return false; // No path found
+        };
+
+        // Example usage:
+        const n = 5;
+        const edges = [[0, 1], [0, 2], [2, 3], [2, 4], [2, 5]];
+        const start = 0;
+        const end = 5;
+
+        console.log(validPath(n, edges, start, end)); // Output: true
+
+    </script>
+</body>
+
+</html>

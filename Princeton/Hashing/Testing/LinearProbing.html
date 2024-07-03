@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        class HashTable{
+            constructor(size){
+                this.size = size;
+                this.keys = new Array(size).fill(null);
+                this.values = new Array(size).fill(null);
+            }
+
+            hash(key){
+                let hash =0;
+                for(let i=0; i<key.length; i++){
+
+                    let char = key.charCodeAt(i);
+                    hash = hash + char;
+                }
+
+                return hash%this.size;
+            }
+
+
+            insert(key,val){
+                let index = this.hash(key);
+
+                while(this.keys[index] !== null){
+                    index = (index+1) % this.size;
+                    
+                }
+
+                this.keys[index] = key;
+                this.values[index] = val;
+            }
+
+
+            //Remove ra get ma filtering technique used.
+            remove(key){
+                
+                let index = this.hash(key);
+
+                while(this.keys[index] !== key){
+
+                    index = (index -1) % this.size;
+
+                    if(this.keys[index] !== null){
+                        return false;
+                    }
+                }
+
+                this.keys[index] = null;
+                this.values[index] = null;
+
+
+            }
+
+            get(key){
+                let index = this.hash(key);
+
+                while(this.keys[index] !== key){
+                    index = (index -1) % this.size;
+                    //not found filtering 
+                    
+                    if(this.keys[index] !== null ){
+                        return false;
+                    }
+                }
+
+                return this.values[index];
+            }
+
+
+            print(){
+                for(let i=0; i<this.size; i++){
+
+                    if(this.keys[i]){
+                        console.log(`Index ${this.keys[i]} Value ${this.values[i]}`)
+                    }else{
+                        console.log(i);
+                    }
+                }
+            }
+
+        }
+
+
+
+
+
+
+
+        // Example usage
+        const hashTable = new HashTable(10);
+        hashTable.insert("apple", "red");
+        hashTable.insert("banana", "yellow");
+        hashTable.insert("orange", "orange");
+        hashTable.insert("grape", "purple");
+        hashTable.insert("watermelon", "green");
+        hashTable.insert("pineapple", "brown");
+        hashTable.print();
+
+        console.log("Value for 'banana':", hashTable.get("banana"));
+        console.log("Removing 'orange'...");
+        hashTable.remove("orange");
+        // hashTable.print();
+    </script>
+</body>
+
+</html>

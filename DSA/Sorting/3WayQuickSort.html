@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function threeWayQuickSort(arr){
+
+            if(arr.length<=1){
+                return arr;
+            }
+
+            let pivot = arr[0];
+            let lesser = [];
+            let equal = [];
+            let greater = [];
+
+            for(item of arr){
+                if(item > pivot){
+                    greater.push(item);
+                }else if(item==pivot){
+                    equal.push(item);
+                }else{
+                    lesser.push(item);
+                }
+            }
+
+            return threeWayQuickSort(lesser).concat(equal, threeWayQuickSort(greater))
+        }
+
+        const unsortedArray = [8, 4, 1, 7, 2, 11, 5, 3];
+        const sortedArray = threeWayQuickSort(unsortedArray);
+        console.log(sortedArray);
+    </script>
+</body>
+</html>

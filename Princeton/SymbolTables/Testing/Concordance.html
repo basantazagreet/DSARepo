@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        function generateConcordance(text, keyword){
+
+            const wordsArray = text.split(/\s+/);
+            const concordance = [];
+
+            for(let i=0; i<wordsArray.length; i++){
+                let word = wordsArray[i].toLowerCase();
+
+                if(word == keyword.toLowerCase()){
+                    let start = Math.max(0, i-5);
+                    let end = Math.min(wordsArray.length - 1, i+5);
+
+                    let context = wordsArray.slice(start,end+1).join(' ');
+
+                    concordance.push({
+                        word: word,
+                        context: context
+                    })
+                
+
+                }
+            }
+
+            return concordance;
+        }
+
+
+
+        // Example usage
+        const text = "The quick brown fox jumps over the lazy dog. The dog barks loudly at the fox.";
+        const keyword = "fox";
+
+        const concordance = generateConcordance(text, keyword);
+        console.log("Concordance for keyword '" + keyword + "':");
+        console.log(concordance);
+    </script>
+</body>
+</html>

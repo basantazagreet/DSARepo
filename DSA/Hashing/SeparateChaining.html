@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Node class for linked list
+        class Node {
+            constructor(key, value) {
+                this.key = key;
+                this.value = value;
+                this.next = null;
+            }
+        }
+
+        // Hash table with separate chaining
+        class HashTable {
+            constructor(size) {
+                this.size = size;
+                //SIZE wata buckets
+                this.buckets = new Array(size).fill(null);
+            }
+
+            // Hash function
+            hash(key) {
+                let hash = 0;
+                for (let i = 0; i < key.length; i++) {
+                    hash += key.charCodeAt(i);
+                }
+                //0-9 int return
+                return hash % this.size;
+            }
+
+            // Insert key-value pair
+            insert(key, value) {
+                const index = this.hash(key);
+                if (!this.buckets[index]) {
+                    this.buckets[index] = new Node(key, value);
+                } else {
+                    //already bucket at i ma kei vaye
+                    let currentNode = this.buckets[index];
+                    while (currentNode.next) {
+                        currentNode = currentNode.next;
+                    }
+                    currentNode.next = new Node(key, value);
+                }
+            }
+
+            // Get value by key
+            get(key) {
+                const index = this.hash(key);
+                //tyo index ma vayeko linkedlist node
+                let currentNode = this.buckets[index];
+                while (currentNode) {
+                    //Linked list traverse
+                    if (currentNode.key === key) {
+                        return currentNode.value;
+                    }
+                    currentNode = currentNode.next;
+                }
+                return null; // Key not found
+            }
+
+            // Remove key-value pair
+            remove(key) {
+                const index = this.hash(key);
+                let currentNode = this.buckets[index];
+                let prevNode = null;
+
+                //Traverse the linkedlist
+                while (currentNode) {
+                    
+                    if (currentNode.key === key) {
+                        //Suru mai vaye
+                        if (prevNode === null) {
+                            this.buckets[index] = currentNode.next;
+                        } else {
+                            prevNode.next = currentNode.next;
+                        }
+                        return true; // Key removed
+                    }
+                    prevNode = currentNode;
+                    currentNode = currentNode.next;
+                }
+                return false; // Key not found
+            }
+
+            // Print the hash table
+            print() {
+                for (let i = 0; i < this.size; i++) {
+                    let currentNode = this.buckets[i];
+                    let elements = [];
+                    while (currentNode) {
+                        elements.push(`[${currentNode.key}: ${currentNode.value}]`);
+                        currentNode = currentNode.next;
+                    }
+                    if (elements.length > 0) {
+                        console.log(`Bucket ${i}: ${elements.join(' -> ')}`);
+                    }
+                }
+            }
+        }
+
+        // Example usage
+        const hashTable = new HashTable(10);
+        hashTable.insert("apple", "red");
+        hashTable.insert("banana", "yellow");
+        hashTable.insert("orange", "orange");
+        hashTable.insert("grape", "purple");
+        hashTable.insert("watermelon", "green");
+        hashTable.insert("pineapple", "brown");
+        hashTable.print();
+
+        console.log("Value for 'banana':", hashTable.get("banana"));
+        console.log("Removing 'orange'...");
+        hashTable.remove("orange");
+        hashTable.print();
+
+    </script>
+</body>
+
+</html>

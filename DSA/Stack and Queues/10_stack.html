@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="val"/>
+    <button class="button btn-1">Push</button>
+    <button onclick="pop()">Pop</button>
+    <button onclick="display()">Display in console</button>
+
+
+    <script>
+
+        let data = [];
+        len = data.length;
+        let btn = document.querySelector('.button.btn-1');
+        btn.addEventListener('click',()=>{
+            let value = document.getElementById('val').value;
+            push(value);
+        });
+
+
+        function push(val){
+            
+            if(len>10){
+                alert("Max stack size reached");
+            }
+            //End ma value insert ra len badhayera array resize
+            data[len] = val;
+            len++;
+        }
+
+        function pop(){
+            if(data.length <=0 ){
+                alert('No Item in stack to pop');
+            }
+            //Just end ko element hatauna array resize gareko
+            data.length = (len-1);
+            len--;
+        }
+
+        function display(){
+            for(let i=0;i<data.length;i++){
+                console.log(data[i]);
+            }
+        }
+
+    </script>
+</body>
+</html>

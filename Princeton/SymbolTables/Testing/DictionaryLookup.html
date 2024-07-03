@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        class SymbolTable{
+
+            constructor(){
+                this.data = {};
+            }
+
+            insert(key, value){
+                this.data[key] = value;
+            }
+
+            lookup(key){
+                return this.data[key];
+            }
+
+            remove(key){
+                delete this.data[key];
+            }
+
+            print(){
+                for (const key in this.data) {
+                    console.log(`Key: ${key} and Value: ${this.data[key]}`);
+                }
+            }
+        }
+
+
+
+
+
+
+        // Example usage
+        const symbolTable = new SymbolTable();
+        symbolTable.insert("apple", "fruit");
+        symbolTable.insert("banana", "fruit");
+        symbolTable.insert("orange", "fruit");
+        symbolTable.insert("apple", "red fruit"); // Update value for existing key
+        symbolTable.print();
+
+        console.log("Lookup 'apple':", symbolTable.lookup("apple"));
+        console.log("Lookup 'grape':", symbolTable.lookup("grape"));
+    </script>
+</body>
+</html>

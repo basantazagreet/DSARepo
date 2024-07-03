@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function fibonacciMemoization(n, memo = {}) {
+            if (n <= 1) {
+                return n;
+            }
+
+            if (!memo.hasOwnProperty(n)) {
+                memo[n] = fibonacciMemoization(n - 1, memo) + fibonacciMemoization(n - 2, memo);
+            }
+
+            return memo[n];
+        }
+
+        // Example usage
+        var nthFibonacciMemo = 6;
+        console.log(`Fibonacci(${nthFibonacciMemo}) using memoization: ${fibonacciMemoization(nthFibonacciMemo)}`);
+
+    </script>
+</body>
+
+</html>

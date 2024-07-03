@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         class Node{
+            constructor(val){
+                this.data=val,
+                this.next=null
+            }
+        }
+        class LinkedList{
+            constructor(val){
+                this.head = new Node(val);
+            }
+            append(val){
+                let new_node = new Node(val);
+                if(this.head==null){
+                    this.head = new_node;
+                }
+                let current_node = this.head;
+                while(current_node.next!==null){
+                    current_node= current_node.next;
+                }
+                current_node.next = new_node;
+            }
+            
+        }
+
+        function deleteWithoutHead(node){
+            let back = node.next;
+            node.data=back.data;
+            node.next= back.next;
+        }
+    </script>
+</body>
+</html>

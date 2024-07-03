@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class SymbolTable{
+            constructor(){
+                this.table = {};
+            }
+
+            insert(key,val){
+                if(!this.table[key]){
+                    this.table[key] = val;
+                }else{
+                    console.log("Already exists")
+                }
+            }
+            print(){
+                for(let item in this.table){
+                    console.log(`Item: ${item} Value: ${this.table[item]}`);
+                }
+            }
+
+            get(key){
+                return this.table[key];
+            }
+
+
+
+            remove(key){
+                delete this.table[key];
+            }
+        }
+
+
+        // Example usage
+        const symbolTable = new SymbolTable();
+        symbolTable.insert("apple", "fruit");
+        symbolTable.insert("banana", "fruit");
+        symbolTable.insert("apple", "red fruit"); // Attempt to insert with existing key
+        symbolTable.print();
+
+
+    </script>
+</body>
+</html>

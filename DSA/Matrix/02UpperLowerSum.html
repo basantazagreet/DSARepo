@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let data = [[6, 5, 4],
+                    [1, 2, 5],
+                    [7, 9, 7]];
+        let upper_sum = 0;
+        let lower_sum = 0;
+        for (let i = 0; i < data.length; i++) {
+            for (let j = 0; j <= i; j++) {
+                lower_sum = lower_sum + data[i][j];
+            }
+        }
+        console.log(lower_sum);
+        for (let i = 0; i < data.length; i++) {
+            for (let j = i; j >= i && j<data[i].length; j++) {
+                upper_sum = upper_sum + data[i][j];
+            }
+        }
+        console.log(upper_sum);
+    </script>
+</body>
+
+</html>

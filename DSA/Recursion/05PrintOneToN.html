@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function print(n) {
+            if (n <= 0)
+                return;
+
+            console.log(n);
+            //Head recursion starts from below
+             print(n - 1);
+            console.log("tala ko");
+            //Tail recursion starts from above
+        }
+        print(5);
+    </script>
+</body>
+
+</html>

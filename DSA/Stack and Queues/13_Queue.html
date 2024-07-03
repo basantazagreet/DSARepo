@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="val-to-enqueue" placeholder="Enter a value to enqueue">
+    <button onclick="enqueueFromInputbox()">Enqueue</button>
+    <button onclick="dequeue()">Dequeue</button>
+    <button onclick="front()">Get Front</button>
+    <button onclick="rear()">Get Rear</button>
+    <button onclick="display()">Display</button>
+
+
+
+
+    <script>
+        let item= [];
+        let len = item.length;
+        let max_size = 7;
+
+        function enqueueFromInputbox(){
+            if(len>=max_size){
+                console.log('Max size of queue reached');
+            }
+            let val = document.getElementById('val-to-enqueue').value;
+            item[len] = val;
+            len++;
+        }
+
+
+
+        function enqueue(val){
+            if(len>=max_size){
+                console.log('Max size of queue reached');
+            }
+            //End(rear) bata insert huncha
+            item[len] = val;
+            len++;
+        }
+
+        function dequeue(){
+            if(len<=0){
+                console.log('Queue is empty');
+            }else{
+                //Sabai values 1 step left sarincha
+                for(let i=0;i<item.length;i++){
+                    item[i]=item[i+1];
+                }
+            }
+            len--;
+            //Last ko undefined element hatauna array resize gareko
+            item.length = len;
+        }
+
+        function display(){
+            console.log(item);
+        }
+
+        function rear(){
+            if(len>0){
+                console.log(item[len-1]);
+            }else{
+                console.log("Queue is empty");
+            }
+        }
+
+        function front(){
+            if(len>0){
+                console.log(item[0]);
+            }else{
+                console.log("Queue is empty");
+            }
+        }
+        enqueue(10);
+        enqueue(20);
+        enqueue(30);
+        enqueue(40);
+
+
+
+    </script>
+</body>
+</html>

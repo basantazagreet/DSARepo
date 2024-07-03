@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function createHeap(array) {
+            // Create a heap from the input array
+            let heap = [...array];
+            // Starting from the last non-leaf node, heapify each node
+            for (let i = Math.floor(heap.length / 2); i >= 0; i--) {
+                heapify(heap, i, heap.length);
+            }
+            return heap;
+        }
+
+        function heapify(heap, i, heapSize) {
+            let left = 2 * i + 1;
+            let right = 2 * i + 2;
+            let largest = i;
+            if (left < heapSize && heap[left] > heap[largest]) {
+                largest = left;
+            }
+            if (right < heapSize && heap[right] > heap[largest]) {
+                largest = right;
+            }
+            if (largest !== i) {
+                [heap[i], heap[largest]] = [heap[largest], heap[i]];
+                heapify(heap, largest, heapSize);
+            }
+        }
+
+        function heapSort(array) {
+            let heap = createHeap(array);
+            let sortedArray = [];
+            while (heap.length > 0) {
+                // Remove the maximum element from the heap and add it to the sorted array
+                sortedArray.unshift(heap.shift());
+                // Re-heapify the remaining elements
+                heap = createHeap(heap);
+            }
+            return sortedArray;
+        }
+
+        let array = [3, 5, 1, 4, 2];
+        let sortedArray = heapSort(array);
+
+    </script>
+</body>
+
+</html>

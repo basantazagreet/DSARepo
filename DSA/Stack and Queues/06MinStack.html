@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*Leetcode Q no.)155 Min Stack (easy)*/
+        class MinStack {
+            constructor() {
+                this.items = [];
+                this.minItems = []
+            }
+
+            push(val) {
+                this.items.push(val);
+                //Logic error: empty ma pani push garna parcha
+                if (this.minItems.length === 0 || val < this.getMin()) {
+                    this.minItems.push(val);
+                }
+            }
+            pop() {
+                if (this.items.length === 0) {
+                    return undefined; // or handle the empty stack case as needed
+                }
+                const popped_item = this.items.pop();
+
+                if (popped_item === this.getMin()) {
+                    this.minItems.pop();
+                }
+
+                return popped_item;
+
+            }
+
+            top() {
+                if(this.items.length === 0){
+                    return;
+                }
+                return this.items[this.items.length - 1];
+            }
+            getMin() {
+                if(this.minItems.length === 0){
+                    return;
+                }
+                return this.minItems[this.minItems.length - 1];
+            }
+
+        }
+
+        let stack = new MinStack();
+        stack.push(10);
+        stack.push(8);
+        stack.push(15);
+        stack.push(18);
+        stack.push(13);
+        console.log(stack.getMin());
+
+    </script>
+</body>
+
+</html>

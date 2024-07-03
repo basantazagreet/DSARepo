@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class SymbolTable {
+            constructor() {
+                this.table = {};
+            }
+
+            // Insert key-value pair into the symbol table
+            insert(key, value) {
+                if (this.table[key] === undefined) {
+                    this.table[key] = value;
+                } else {
+                    console.log(`Key '${key}' already exists. Performing exception filtering.`);
+                    // Perform exception filtering
+                    // Here, we might choose to update the existing value, ignore the new value, or perform other actions
+                    // For this example, let's simply log a message indicating the conflict
+                    console.log(`Conflict: Key '${key}' already exists with value '${this.table[key]}'.`);
+                }
+            }
+
+            // Get value associated with the given key
+            get(key) {
+                return this.table[key];
+            }
+
+            // Remove key-value pair from the symbol table
+            remove(key) {
+                delete this.table[key];
+            }
+
+            // Print the symbol table
+            print() {
+                console.log("Symbol Table:");
+                for (let key in this.table) {
+                    console.log(`${key}: ${this.table[key]}`);
+                }
+            }
+        }
+
+        // Example usage
+        const symbolTable = new SymbolTable();
+        symbolTable.insert("apple", "fruit");
+        symbolTable.insert("banana", "fruit");
+        symbolTable.insert("apple", "red fruit"); // Attempt to insert with existing key
+        symbolTable.print();
+
+    </script>
+</body>
+
+</html>

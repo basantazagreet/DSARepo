@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class QuickUnion {
+            constructor(size) {
+                this.ids = [];
+                for (let i = 0; i < size; i++) {
+                    this.ids[i] = i;
+                }
+            }
+
+            // Find the root of the component/set to which element p belongs
+            findRoot(p) {
+                while (p !== this.ids[p]) {
+                    p = this.ids[p];
+                }
+                return p;
+            }
+
+            // Check if elements p and q belong to the same component/set
+            connected(p, q) {
+                return this.findRoot(p) === this.findRoot(q);
+            }
+
+            // Merge components/sets containing elements p and q
+            union(p, q) {
+                const rootP = this.findRoot(p);
+                const rootQ = this.findRoot(q);
+                if (rootP === rootQ) return;
+
+                this.ids[rootP] = rootQ;
+            }
+        }
+
+        // Example usage:
+        const uf = new QuickUnion(10);
+        uf.union(0, 1);
+        uf.union(2, 3);
+        uf.union(4, 5);
+        uf.union(6, 7);
+        console.log(uf.connected(1, 5)); // false
+        uf.union(1, 5);
+        console.log(uf.connected(1, 5)); // true
+
+    </script>
+</body>
+
+</html>

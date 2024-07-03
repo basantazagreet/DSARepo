@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Node{
+            constructor(val){
+                this.data=val,
+                this.next=null
+            }
+        }
+        class LinkedList{
+            constructor(val){
+                this.head = new Node(val);
+            }
+            addInFirst(val){
+                let new_node = new Node(val);
+                if(this.head==null){
+                    this.head = new_node;
+                }
+                new_node.next = this.head;
+                this.head = new_node;
+            }
+            append(val){
+                let new_node = new Node(val);
+                if(this.head==null){
+                    this.head = new_node;
+                }
+                let current_node = this.head;
+                while(current_node.next!==null){
+                    current_node= current_node.next;
+                }
+                current_node.next = new_node;
+            }
+
+            addToMiddle(val){
+                let new_node = new Node(val);
+                if(this.head==null){
+                    this.head = new_node;
+                }
+                let slow_pointer = this.head;
+                let fast_pointer = this.head;
+
+                while(fast_pointer!== null && fast_pointer.next !==null){
+                    slow_pointer = slow_pointer.next;
+                    fast_pointer = fast_pointer.next.next;
+                }
+                slow_pointer.next = new_node;
+            }
+            deleteNode(index){
+                if(this.head === null){
+                    console.log('Linked List Empty');
+                    return;
+                }
+                let lead = this.head;
+
+                let count = 1;
+                while(count < index -1){
+                    lead = lead.next;
+                    count++;
+                }
+                let back_node = lead.next.next;
+                lead.next = back_node;
+            }
+
+            deleteFromLast(){
+                if(this.head === null){
+                    console.log('Linked List Empty');
+                    return;
+                }
+                let lead = this.head;
+                let current = this.head;
+
+                while(current.next!==null){
+                    lead = current
+                    current = current.next;
+                }
+                lead.next = null;
+            }
+
+            traverseRecursive(current){
+                if(current.next===null){
+                    return;
+                }
+                return this.traverseRecursive(current.next);
+                console.log(current.data);
+                //Head recursion goes above from base meaning here
+                //it will print from head.
+            }
+        }
+
+        class CircularLinkedList{
+            constructor(val){
+                this.head = new Node(val);
+                this.head.next = this.head;
+            }
+
+            appendNode(val){
+                let new_node = new Node(val);
+
+                if(this.head === null){
+                    this.head = new_node;
+                    this.head.next = this.head;
+                }else{
+                   let current_node = this.head;
+
+                    while(current_node.next !== this.head){
+                        current_node = current_node.next;
+
+                    }
+
+                    current_node.next = new_node;
+                    new_node.next = this.head;
+                }
+            }
+
+            display(){
+                if(this.head === null){
+                    console.log('LinkedList empty');
+                    return;
+                }
+                let current_node = this.head;
+                do{
+                    console.log(current_node.data);
+                    current_node = current_node.next;
+                }while(current_node !== this.head);
+            }
+        }
+
+        let circular = new CircularLinkedList(1);
+        circular.appendNode(2);
+        circular.appendNode(3);
+        circular.appendNode(4);
+        circular.appendNode(5);
+        circular.display();
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+         class Stack{
+            max_size;
+            current_length;
+            item= [];
+
+            constructor(size){
+                this.max_size = size;
+                this.current_length = this.item.length;
+                console.log("Working");
+            }
+
+             push(val){
+                if(this.item.length>=this.max_size){
+                    console.log("Stack overflow!!")
+                }else{
+                    //Current length counter badhako ra pahila element end ma haleko
+                    this.item[this.current_length]=val;
+                    this.current_length++;
+                }
+            }
+            pop(){
+                if(this.current_length<=0){
+                    console.log('Stack is empty');
+                }
+                else{
+                    //End bata data pop garna just array resize gareko
+                    this.current_length--;
+                    this.item.length = this.current_length;
+                }
+            }
+
+
+            display(){
+                console.log(this.item);
+            }
+        }
+        let basanta = new Stack(5);
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function shellSort(arr) {
+            const n = arr.length;
+            let gap = Math.floor(n / 2);
+
+            //Gap ghatdai jancha 1 samma aani end
+            while (gap > 0) {
+                //gap vanda right tira iteration as i
+
+                //Perform insertion  sort with current gap
+                for (let i = gap; i < n; i++) {
+                    //temp ma mid element
+                    let temp = arr[i];
+                    //mid index
+                    let j = i;
+
+                    //tyo back loop laune sorted gapped backloop ma
+                    //temp lai tesko position ma purauni
+                    while (j >= gap && arr[j - gap] > temp) {
+                        //J ma j-gap halne if tyo thulo vaye
+                        arr[j] = arr[j - gap];
+                        j -= gap;
+                    }
+
+                    arr[j] = temp;
+                }
+
+
+                gap = Math.floor(gap / 2);
+            }
+            return arr;
+        }
+
+        // Example usage:
+        const array = [12, 34, 54, 2, 3];
+        console.log("Original Array:", array);
+        console.log("Sorted Array:", shellSort(array));
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Bubble sort see console</h1>
+    <script>
+        /*
+        1) Bubble sort == double loop ma j ra j+1 compare garne ra swap garni 
+        2) Selection sort == Select smallest element from unsorted array and swap
+        in appropriate position
+        3) Insertion sort == sorted left side ma backloop launi aani swap haina insert garne 
+        j ko value use garera right tira sardai jane
+        4) Merge sort == Merge sorted left and sorted right using recursion
+        5) Quick sort === Use pivot and recursion.
+        6) Counting sort === sabai element ko countingArr[data[i]]++;
+        7) Radix sort === bucket sort 
+
+        Time complexity: O(n^2)
+        Loop runs n-1 times: n(n-1)
+        */
+        let data = [40,30,12,25];
+
+        console.log(data);
+
+        //data ko loop according to position not according to each item
+        for(let i=0; i<data.length; i++){
+
+            //data item ko individual loop matching each other element
+            for(let j=0; j<data.length; j++){
+                if(data[j]>data[j+1]){
+
+                    //left ko item greater vaye swap gardai jane
+                    let temp = data[j];
+                    data[j] = data[j+1];
+                    data[j+1] = temp;
+                }
+            }
+        }
+        console.log(data);
+    </script>
+</body>
+</html>

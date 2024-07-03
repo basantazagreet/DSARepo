@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let array1 = [2,5,7,9,11,16,18,20,27,29];
+        let array2 = [13,15,17,19,33];
+        let array3 = [];
+
+        let a1=0;
+        let a2=0;
+        let a3=0;
+
+        while(a1<array1.length || a2<array2.length){
+            //smaller lai array3 ma rakhdai gako
+            if(array1[a1] < array2[a2]){
+                array3[a3] = array1[a1];
+                a1++;
+            }else{
+                array3[a3] = array2[a2];
+                a2++;
+            }
+            a3++;
+        }
+
+        // while(a1<array1.length){
+        //     array3[a3]=array1[a1];
+        //     a1++;
+        //     a3++;
+        // }
+
+        console.log(array1);
+        console.log(array2);
+        console.log(array3);
+
+    </script>
+</body>
+</html>

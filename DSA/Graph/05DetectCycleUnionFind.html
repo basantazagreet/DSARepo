@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class UnionFind {
+            constructor(size) {
+                this.parent = new Array(size);
+                this.rank = new Array(size);
+                for (let i = 0; i < size; i++) {
+                    this.parent[i] = i;
+                    this.rank[i] = 0;
+                }
+            }
+
+            find(x) {
+                if (this.parent[x] !== x) {
+                    this.parent[x] = this.find(this.parent[x]);
+                }
+                return this.parent[x];
+            }
+
+            union(x, y) {
+                const rootX = this.find(x);
+                const rootY = this.find(y);
+
+                if (rootX === rootY) return false;
+
+                if (this.rank[rootX] < this.rank[rootY]) {
+                    this.parent[rootX] = rootY;
+                } else if (this.rank[rootX] > this.rank[rootY]) {
+                    this.parent[rootY] = rootX;
+                } else {
+                    this.parent[rootY] = rootX;
+                    this.rank[rootX]++;
+                }
+
+                return true;
+            }
+        }
+
+        function isCycle(graph, n) {
+            const uf = new UnionFind(n);
+
+            for (let i = 0; i < graph.length; i++) {
+                const [src, dest] = graph[i];
+
+                //Set ko Union gardai jancha eutai rank navaye
+                //already same rank ma vaye false return garcha
+                if (!uf.union(src, dest)) {
+                    return true; // Cycle detected
+                }
+            }
+
+            return false; // No cycle detected
+        }
+
+        // Example usage:
+        const graph = [
+            [0, 1],
+            [1, 2],
+            [2, 3],
+            [3, 0],
+        ];
+
+        console.log(isCycle(graph, 4)); // true (Cycle detected)
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // Define a custom object type
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        Person.prototype.hashCode = function(){
+            let hash = 17;
+
+            hash = hash*31+this.name.hashCode();
+            hash = hash*31+this.age;
+
+            return hash;
+        }
+
+        String.prototype.hashCode = function(){
+            let hash = 0;
+            if(this.length == 0) return hash;
+            for(let i=0; i<this.length; i++){
+               const char = this.charCodeAt(i);
+
+               hash = (hash<<5)-hash + char;
+               hash&=hash;
+                
+            }
+
+            return hash;
+        }
+
+         // Example usage
+         const person1 = new Person("Alice", 30);
+        const person2 = new Person("Bob", 25);
+
+        console.log("Hash code for person1:", person1.hashCode());
+        console.log("Hash code for person2:", person2.hashCode());
+    </script>
+</body>
+</html>

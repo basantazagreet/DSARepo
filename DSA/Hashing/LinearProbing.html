@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class HashTable {
+            constructor(size) {
+                this.size = size;
+                this.keys = new Array(size).fill(null);
+                this.values = new Array(size).fill(null);
+            }
+
+            // Hash function
+            hash(key) {
+                let hash = 0;
+                for (let i = 0; i < key.length; i++) {
+                    hash += key.charCodeAt(i);
+                }
+                return hash % this.size;
+            }
+
+            // Insert key-value pair
+            insert(key, value) {
+                let index = this.hash(key);
+                //index ma already data vaye, 
+                //next index khojni with linear probing
+                //next pani occupied huna sakcha so while loop lako
+                while (this.keys[index] !== null) {
+                    index = (index + 1) % this.size;
+                }
+                //Right index reach garesi data add garni
+                this.keys[index] = key;
+                this.values[index] = value;
+            }
+
+            // Get value by key
+            get(key) {
+                let index = this.hash(key);
+                //right index ma pugna linear probing gareko, null vaye sakiyo
+                while (this.keys[index] !== key) {
+                    index = (index + 1) % this.size; // Linear probing
+                    if (this.keys[index] === null) {
+                        return null; // Key not found
+                    }
+                }
+                return this.values[index];
+            }
+
+            // Remove key-value pair, right index ma pugera null garne 
+            remove(key) {
+                let index = this.hash(key);
+                while (this.keys[index] !== key) {
+                    index = (index + 1) % this.size; // Linear probing
+                    if (this.keys[index] === null) {
+                        return false; // Key not found
+                    }
+                }
+                this.keys[index] = null;
+                this.values[index] = null;
+                return true; // Key removed
+            }
+
+            // Print the hash table
+            print() {
+                for (let i = 0; i < this.size; i++) {
+                    if (this.keys[i] !== null) {
+                        console.log(`[${i}] ${this.keys[i]}: ${this.values[i]}`);
+                    } else {
+                        console.log(`[${i}]`);
+                    }
+                }
+            }
+        }
+
+            // Example usage
+            const hashTable = new HashTable(10);
+            hashTable.insert("apple", "red");
+            hashTable.insert("banana", "yellow");
+            hashTable.insert("orange", "orange");
+            hashTable.insert("grape", "purple");
+            hashTable.insert("watermelon", "green");
+            hashTable.insert("pineapple", "brown");
+            hashTable.print();
+
+            console.log("Value for 'banana':", hashTable.get("banana"));
+            console.log("Removing 'orange'...");
+            hashTable.remove("orange");
+            hashTable.print();
+
+    </script>
+</body>
+
+</html>

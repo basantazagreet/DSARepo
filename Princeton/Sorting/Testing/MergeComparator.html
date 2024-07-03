@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        function mergeSort(arr, comparator) {
+            if (arr.length <= 1) {
+                return arr;
+            }
+
+            let mid = Math.floor(arr.length / 2);
+            let left = arr.slice(0, mid);
+            let right = arr.slice(mid);
+
+            return merge(mergeSort(left, comparator),(mergeSort(right, comparator)), comparator);
+        }
+        function merge(left, right, comparator) {
+            let result = [];
+            let leftIndex = 0;
+            let rightIndex = 0;
+
+            while (leftIndex < left.length && rightIndex < right.length) {
+                if (comparator(left[leftIndex], right[rightIndex]) <= 0) {
+                    result.push(left[leftIndex]);
+                    leftIndex++;
+                } else {
+                    result.push(right[rightIndex]);
+                    rightIndex++;
+                }
+
+            }
+
+            return result.concat(left.slice(leftIndex), right.slice(rightIndex));
+        }
+
+
+
+
+        // Example usage:
+        let arr = [5, 3, 8, 4, 2, 9, 1, 6, 7];
+        console.log("Original Array:", arr);
+
+        // Sorting in ascending order
+        let ascendingSortedArray = mergeSort(arr, (a, b) => a - b);
+        console.log("Ascending Sorted Array:", ascendingSortedArray);
+
+        // Sorting in descending order
+        let descendingSortedArray = mergeSort(arr, (a, b) => b - a);
+        console.log("Descending Sorted Array:", descendingSortedArray);
+    </script>
+</body>
+
+</html>

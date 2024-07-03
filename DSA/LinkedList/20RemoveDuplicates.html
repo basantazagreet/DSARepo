@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Node {
+            constructor(val) {
+                this.data = val,
+                    this.next = null
+            }
+        }
+        class LinkedList {
+            constructor(val) {
+                this.head = new Node(val);
+            }
+            append(val) {
+                let new_node = new Node(val);
+                if (this.head == null) {
+                    this.head = new_node;
+                }
+                let current_node = this.head;
+                while (current_node.next !== null) {
+                    current_node = current_node.next;
+                }
+                current_node.next = new_node;
+            }
+
+            removeDuplicates(){
+                let curr = this.head;
+
+                while(curr !== null && curr.next !== null){
+                    if(curr.data == curr.next.data){
+                        let duplicate = curr.next;
+                        curr.next = duplicate.next;
+                    }else{
+                        curr = curr.next;
+                    }
+                }
+            }
+
+        }
+
+        let l1 = new LinkedList();
+        l1.append(1);
+        l1.append(2);
+        l1.append(3);
+        l1.append(4);
+        l1.append(4);
+        l1.append(5);
+        l1.removeDuplicates();
+        console.log(l1);
+    </script>
+</body>
+
+</html>

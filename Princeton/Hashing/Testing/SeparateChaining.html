@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Node {
+            constructor(key, val) {
+                //Node ko contents
+                this.key = key;
+                this.val = val;
+                this.next = null;
+            }
+        }
+
+        class HashTable {
+            constructor(size) {
+                this.size = size;
+                //Create bucket
+                this.buckets = new Array(size).fill(null);
+            }
+
+
+
+            hash(key) {
+                let hash = 0;
+                for (let i = 0; i < key.length; i++) {
+                    hash += key.charCodeAt(i);
+                }
+                return hash % this.size;
+            }
+
+            insert(key, val) {
+                let index = this.hash(key);
+                let new_node = new Node(key, val)
+                if (!this.buckets[index]) {
+                    this.buckets[index] = new_node;
+                } else {
+                    //Linked list extract from bucket
+                    let list = this.buckets[index]
+
+                    while (list.next) {
+                        list = list.next;
+                    }
+
+                    list.next = new_node;
+                }
+            }
+
+
+            remove(key) {
+                let index = this.hash(key);
+                let currentNode = this.buckets[index];
+                let prev = null
+                
+                while(currentNode){
+                    if(currentNode.key == key){
+                        if(prev==null){
+                            this.buckets[index] = currentNode.next
+                        }else{
+                            prev.next = currentNode.next;
+                        }
+                        return true;
+                    }
+                    currentNode = currentNode.next;
+                    prev = currentNode;
+                }
+
+                return false;
+
+            }
+
+
+            get(key){
+                let index = this.hash(key);
+                let currentNode = this.buckets[index];
+
+                while(currentNode){
+                    if(currentNode.key == key){
+                        return currentNode.val;
+                    }
+                    currentNode = currentNode.next;
+                }
+
+                return null;
+            }
+
+            print(){
+                for(let i=0; i<this.size; i++){
+                    if(this.buckets[i]){
+                        let currentNode = this.buckets[i];
+                        while(currentNode){
+                            console.log(`At index ${i}: Key is ${currentNode.key}Value is ${currentNode.val}`);
+                            currentNode = currentNode.next;
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+        // Example usage
+        const hashTable = new HashTable(10);
+        hashTable.insert("apple", "red");
+        hashTable.insert("banana", "yellow");
+        hashTable.insert("orange", "orange");
+        hashTable.insert("grape", "purple");
+        hashTable.insert("watermelon", "green");
+        hashTable.insert("pineapple", "brown");
+        hashTable.print();
+
+        console.log("Value for 'banana':", hashTable.get("banana"));
+        console.log("Removing 'orange'...");
+        hashTable.remove("orange");
+        hashTable.print();
+    </script>
+</body>
+
+</html>

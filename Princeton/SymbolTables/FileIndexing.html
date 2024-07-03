@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const fs = require('fs');
+
+        class FileIndex {
+            constructor() {
+                this.index = {};
+            }
+
+            // Index a file by its content
+            indexFile(filePath) {
+                const content = fs.readFileSync(filePath, 'utf-8');
+                const words = content.split(/\s+/); // Split content into words (assuming space-separated)
+
+                words.forEach(word => {
+                    word = word.toLowerCase(); // Normalize word to lowercase
+                    if (!this.index[word]) {
+                        //initialize an object with key word inside loop
+                        this.index[word] = [];
+                    }
+                    /*checks if the filePath is already present in the array 
+                    associated with the word in the index. 
+                    If not, it adds the filePath to the array.*/
+                    if (!this.index[word].includes(filePath)) {
+                        //key is word value is array of all filepath
+                        //that contain the key word.
+                        this.index[word].push(filePath);
+                    }
+                });
+            }
+
+            // Search for files containing a given keyword
+            search(keyword) {
+                const normalizedKeyword = keyword.toLowerCase();
+                return this.index[normalizedKeyword] || [];
+            }
+        }
+
+        // Example usage
+        const fileIndex = new FileIndex();
+        fileIndex.indexFile('file1.txt');
+        fileIndex.indexFile('file2.txt');
+
+        console.log("Files containing 'apple':", fileIndex.search('apple'));
+        console.log("Files containing 'banana':", fileIndex.search('banana'));
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*Time complexity O(NlogN)
+        The list pf size n is divided into max Log(n) parts
+        and merging of sublist into single list takes O(N) times.
+        */
+        function mergeSort(arr) {
+            if (arr.length <= 1) {
+                return arr;
+            }
+
+            // Split the array into two halves
+            const middle = Math.floor(arr.length / 2);
+            const leftHalf = arr.slice(0, middle);
+            const rightHalf = arr.slice(middle);
+
+            // Recursively sort both halves
+            const sortedLeft = mergeSort(leftHalf);
+            const sortedRight = mergeSort(rightHalf);
+
+            // Merge the sorted halves
+            return merge(sortedLeft, sortedRight);
+        }
+
+        function merge(left, right) {
+            let result = [];
+            let leftIndex = 0;
+            let rightIndex = 0;
+
+            // Compare elements from both arrays and merge them in sorted order
+            while (leftIndex < left.length && rightIndex < right.length) {
+                if (left[leftIndex] < right[rightIndex]) {
+                    result.push(left[leftIndex]);
+                    leftIndex++;
+                } else {
+                    result.push(right[rightIndex]);
+                    rightIndex++;
+                }
+            }
+
+            // If there are remaining elements in either array, append them to the result
+            return result.concat(left.slice(leftIndex), right.slice(rightIndex));
+        }
+
+        // Example usage:
+        const unsortedArray = [8, 4, 1, 7, 2, 11, 5, 3];
+        const sortedArray = mergeSort(unsortedArray);
+        console.log(sortedArray);
+
+    </script>
+</body>
+
+</html>

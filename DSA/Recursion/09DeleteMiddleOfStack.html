@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Node {
+            constructor(data) {
+                this.data = data;
+                this.next = null;
+            }
+        }
+
+        class Stack {
+            constructor() {
+                this.top = null;
+            }
+
+            // Check if the stack is empty
+            isEmpty() {
+                return this.top === null;
+            }
+
+            // Push an element onto the stack
+            push(data) {
+                const newNode = new Node(data);
+                newNode.next = this.top;
+                this.top = newNode;
+            }
+
+            // Pop an element from the stack
+            pop() {
+                if (this.isEmpty()) {
+                    console.log("Stack Underflow: The stack is empty.");
+                    return null;
+                } else {
+                    const poppedData = this.top.data;
+                    this.top = this.top.next;
+                    return poppedData;
+                }
+            }
+
+            top() {
+                return this.top;
+            }
+
+            // Peek at the top element of the stack without removing it
+            peek() {
+                if (this.isEmpty()) {
+                    console.log("Stack is empty.");
+                    return null;
+                } else {
+                    return this.top.data;
+                }
+            }
+
+            // Display the elements of the stack
+            display() {
+                let current = this.top;
+                while (current) {
+                    console.log(current.data);
+                    current = current.next;
+                }
+            }
+        }
+
+        let stack = new Stack();
+        stack.push(5);
+        stack.push(4);
+        stack.push(3);
+        stack.push(2);
+        stack.push(1);
+
+        function deleteMiddleOfStack(stack, count, pos) {
+            if (stack.isEmpty() || pos > count) {
+                console.log("Invalid position or stack is empty.");
+                return;
+            }
+
+            if (count === pos) {
+                stack.pop();
+                return;
+            }
+
+            let top = stack.pop();
+            //Tail recursion starts from above
+            //Mathi bata tala tira jancha
+            count--;
+
+            //count -- func call ma hale hunna
+            deleteMiddleOfStack(stack, count, pos);
+
+            stack.push(top);
+            //Head recursion starts from base of the loop
+            //Base bata mathi tira jancha.
+        }
+
+
+        deleteMiddleOfStack(stack, 5, 3);
+        console.log(stack);
+
+    </script>
+</body>
+
+</html>

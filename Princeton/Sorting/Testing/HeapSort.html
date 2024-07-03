@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        /*
+        left = 2i+1
+        right = 2i+2
+        parent = (i-1)/2
+        last non leaf node = length/2
+        */
+        function createHeap(arr) {
+            let heap = [...arr];
+
+            for(let i = Math.floor(arr.length/2); i>=0; i--){
+                heapify(heap, i, heap.length);
+            }
+
+            return heap;
+
+        }
+
+        function heapify(heap, i, size){
+            let left = 2*i + 1;
+            let right = 2*i + 2;
+            let biggest = i;
+
+
+            if(left<size && heap[left] > heap[biggest]){
+                biggest = left;
+            }
+            if(right<size && heap[right] > heap[biggest]){
+                biggest = right;
+            }
+
+            if(biggest!==i){
+                [heap[biggest], heap[i] ] = [heap[i], heap[biggest] ];
+                heapify(heap, biggest, size);
+            }
+        }
+
+        function heapSort(arr){
+            let heap = createHeap(arr);
+            let sortedArr = [];
+            while(heap.length>0){
+                sortedArr.unshift(heap.shift());
+                heap = createHeap(heap);
+            }
+            return sortedArr;
+        }
+
+        let array = [3, 5, 1, 4, 2];
+        let sortedArray = heapSort(array);
+        console.log(sortedArray);
+    </script>
+</body>
+
+</html>

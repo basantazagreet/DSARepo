@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function hashCodeOnString(str){
+
+            let hash = 0;
+            for(let i=0; i<str.length; i++){
+               const char = str.charCodeAt(i);
+
+               hash = (hash<<5)-hash + char;
+               hash&=hash;
+                
+            }
+
+            return hash;
+        }
+        console.log(hashCodeOnString('Basanta'));
+
+    </script>
+</body>
+</html>

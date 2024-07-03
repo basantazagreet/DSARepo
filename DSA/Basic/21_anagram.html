@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        function checkAnagram(str1, str2) {
+            let obj_str1 = {};
+            if (str1.length !== str2.length) {
+                return false;
+            }
+
+            //Iterates through str1 and counts the frequency of each character, storing it in the obj_str1 object.
+            for (ch of str1) {
+                //key is ch value is frequency of obj_str1[ch]
+                obj_str1[ch] = (obj_str1[ch] || 0) + 1;
+
+            }
+            //Iterates through str2 and compares the characters' frequencies with obj_str1.
+            for (ch of str2) {
+                //If a character from str2 is not found in obj_str1 or its frequency becomes negative, it returns false.
+                if (!obj_str1[ch]) {
+                    return false;
+                }
+
+                obj_str1[ch]--;
+            }
+            //If both strings pass the comparison, it returns true, indicating that they are anagrams.
+            return true;
+        }
+        console.log(checkAnagram('hello', 'llesho'))
+    </script>
+</body>
+
+</html>

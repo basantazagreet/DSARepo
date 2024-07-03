@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+               class Stack {
+            constructor() {
+                this.items = [];
+            }
+
+            isEmpty() {
+                return this.items.length === 0;
+            }
+
+            push(item) {
+                this.items.push(item);
+            }
+
+            pop() {
+                if (this.isEmpty()) {
+                    console.log("Stack Underflow: The stack is empty.");
+                    return null;
+                } else {
+                    return this.items.pop();
+                }
+            }
+
+            peek() {
+                if (this.isEmpty()) {
+                    console.log("Stack is empty.");
+                    return null;
+                } else {
+                    return this.items[this.items.length - 1];
+                }
+            }
+        }
+
+        function evaluatePostfix(str){
+            let stack = new Stack();
+            for(ch of str){
+                if(!isNaN(ch)){
+                    //ch Number vaye push
+                    stack.push(ch);
+                }else{
+                    let operand1 = parseInt(stack.pop());
+                    let operand2 = parseInt(stack.pop());
+
+                    switch(ch){
+                        case '+':
+                            stack.push(operand1+operand2);
+                            break;
+                        case '-':
+                            stack.push(operand2-operand1);
+                            break;
+                        case '*':
+                            stack.push(operand2*operand1);
+                            break;
+                        case '/':
+                            stack.push(operand2/operand1);
+                            break;
+                        default:
+                            console.log("Error");
+                            break;
+                    }
+
+                    
+                }
+            }
+            return stack.pop();
+        }
+        // Example usage:
+        const postfixExpression = "23*5+"; //Output 11
+        const result = evaluatePostfix(postfixExpression);
+        console.log("Result of postfix expression", postfixExpression, ":", result);
+    </script>
+</body>
+</html>

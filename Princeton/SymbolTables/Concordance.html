@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function generateConcordance(text, keyword) {
+            // Split the text into words
+            const words = text.split(/\s+/);
+
+            // Initialize an empty concordance array
+            const concordance = [];
+
+            // Iterate through each word
+            for (let i = 0; i < words.length; i++) {
+                const word = words[i].toLowerCase(); // Normalize word to lowercase
+
+                // If the current word matches the keyword, add it to the concordance array
+                if (word === keyword.toLowerCase()) {
+                    // Define the context (surrounding words)
+                    const contextStart = Math.max(0, i - 5); // Start of context, considering 5 words before
+                    //words length thorai vaye sabai print garna mildaina
+                    const contextEnd = Math.min(words.length - 1, i + 5); // End of context, considering 5 words after
+                    const context = words.slice(contextStart, contextEnd + 1).join(' '); // Join words to form context string
+
+                    // Push the word and its context to the concordance array
+                    concordance.push({ word: words[i], context: context });
+                }
+            }
+
+            return concordance;
+        }
+
+        // Example usage
+        const text = "The quick brown fox jumps over the lazy dog. The dog barks loudly at the fox.";
+        const keyword = "fox";
+
+        const concordance = generateConcordance(text, keyword);
+        console.log("Concordance for keyword '" + keyword + "':");
+        console.log(concordance);
+
+    </script>
+</body>
+
+</html>

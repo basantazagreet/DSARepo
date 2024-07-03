@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let data = [[6, 5, 4],
+                    [1, 2, 5],
+                    [7, 9, 7]];
+        let transpose = [];
+        for (let i = 0; i < data.length; i++) {
+            for (let j = 0; j <data[i].length; j++) {
+                transpose.push(data[j][i]);
+            }
+        }
+        console.log(transpose);
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class MinHeap {
+            constructor() {
+                this.data = [];
+            }
+
+            // ... (other methods like push, decreaseKey, delete, etc.)
+
+            buildHeap() {
+                // Start from the last non-leaf node and perform heapify
+                for (let i = Math.floor(this.data.length / 2) - 1; i >= 0; i--) {
+                    this.heapify(i);
+                }
+            }
+
+            heapify(index) {
+                // Adjust the heap from the given index to maintain the min-heap property
+                let left = index * 2 + 1;
+                let right = index * 2 + 2;
+                let smallest = index;
+
+                if (left < this.data.length && this.data[left] < this.data[smallest]) {
+                    smallest = left;
+                }
+
+                if (right < this.data.length && this.data[right] < this.data[smallest]) {
+                    smallest = right;
+                }
+
+                if (smallest !== index) {
+                    [this.data[index], this.data[smallest]] = [this.data[smallest], this.data[index]];
+                    this.heapify(smallest);
+                }
+            }
+        }
+
+        // Example usage:
+        const array = [10, 20, 15, 40, 50, 100, 25, 45];
+        const minHeap = new MinHeap();
+        minHeap.data = array;
+
+        console.log(minHeap.data); // Original array
+        minHeap.buildHeap();
+        console.log(minHeap.data); // Array converted to a min-heap
+
+    </script>
+</body>
+
+</html>

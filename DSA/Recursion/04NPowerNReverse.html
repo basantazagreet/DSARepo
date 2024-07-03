@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function NPowerNReverse(n, r) {
+            //ans in the form of mod chaiyo
+            //a*b % mod ra (a%mod *b%mod)%mod eutai ho
+            let MOD = 1e9+7;
+            if (n == 0)
+                return 0;
+            if (r == 0)
+                return 1;
+            if(r%2==0){
+                //even vayema,
+                //r/2*2 = r (3^4 ko example herni), reduces recursive calls
+                let ans = NPowerNReverse(n, r/2);
+                return (ans%MOD * ans%MOD) %MOD;
+            }else{
+                let ans = NPowerNReverse(n, (r-1)/2);
+                return (ans%MOD * ans%MOD * n%MOD) %MOD;
+            }
+        }
+    </script>
+</body>
+
+</html>
